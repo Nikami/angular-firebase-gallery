@@ -1,0 +1,32 @@
+html {
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar;
+  font-size: 10px;
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Roboto", "Helvetica Neue Light", "Helvetica Neue", Helvetica,
+    Arial, "Lucida Grande", sans-serif;
+  margin: 0;
+  font-size: 1.4rem;
+  height: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
