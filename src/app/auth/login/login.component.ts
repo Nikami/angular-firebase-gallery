@@ -1,5 +1,7 @@
-import { Component, HostBinding, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AUTH_SUBJECT, AuthService } from '../services/auth.service';
+import { IUser } from '../../shared/shared.models';
 
 @Component({
   selector: 'afg-login',
@@ -18,22 +20,44 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  @Input() errorMessage: string | null;
+  errorMessage: string = '';
 
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+  form: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder, private auth: AuthService) {
+    this.createForm();
+  }
+
+  createForm(): void {
+    this.form = this.fb.group({
+      email: ['airad.tse@gmail.com', Validators.required],
+      password: ['alister154', Validators.required]
+    });
+  }
+
+  rebuildForm(): void {
+    this.form.reset({
+      email: '',
+      password: ''
+    });
+    this.pending = false;
+  }
 
   ngOnInit() {
   }
 
-  submit() {
-    if (this.form.valid) {
-      console.log('oooook! =');
-    }
+  onSubmit({ value }: { value: IUser }): void {
+    this.errorMessage = '';
+    this.pending = true;
+    this.auth.login(value);
+    this.auth.get(AUTH_SUBJECT.ERROR).subscribe((error: string) => {
+      this.errorMessage = error;
+      this.rebuildForm();
+    })
+  }
+
+  logout() {
+    this.auth.logout();
   }
 
 }

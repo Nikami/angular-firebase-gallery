@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared';
 import { LoginComponent } from './login/login.component';
 import { AuthRouting } from './auth.routing';
-import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   imports: [

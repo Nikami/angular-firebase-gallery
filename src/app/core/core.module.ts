@@ -7,6 +7,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NotFoundInterceptor } from './http/notfound.interceptor';
 import { TimeoutInterceptor } from './http/timeout.interceptor';
+import { StorageService } from './http/storage.service';
+import { CookieModule, CookieService } from 'ngx-cookie';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -21,7 +23,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    CookieModule.forRoot()
   ],
   declarations: [],
   providers: [
@@ -34,7 +37,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       provide: HTTP_INTERCEPTORS,
       useClass: NotFoundInterceptor,
       multi: true
-    }
+    },
+    StorageService,
+    CookieService
   ]
 })
 export class CoreModule {

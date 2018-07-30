@@ -36,6 +36,7 @@
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
     "firebase": "^5.3.0",
+    "ngx-cookie": "^4.0.2",
     "normalize.css": "^8.0.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"

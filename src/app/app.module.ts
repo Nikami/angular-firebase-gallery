@@ -14,6 +14,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
+import { GalleryModule } from './gallery/gallery.module';
+import { AuthService } from './auth/services/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +29,8 @@ import { AuthModule } from './auth/auth.module';
     AngularFireModule.initializeApp(environment.firebase, 'angular-firebase-gallery'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AuthModule
+    AuthModule,
+    GalleryModule
   ],
   providers: [],
   bootstrap: [AppComponent]
