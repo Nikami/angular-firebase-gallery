@@ -4,6 +4,7 @@
 
 // Mixins
 @import "~bootstrap/scss/mixins/breakpoints";
+@import "~bootstrap/scss/mixins/border-radius";
 @import "~bootstrap/scss/mixins/grid-framework";
 @import "~bootstrap/scss/mixins/grid";
 @import "~bootstrap/scss/mixins/hover";
@@ -13,6 +14,7 @@
 @import "~bootstrap/scss/mixins/text-truncate";
 
 // Utilities
+@import "~bootstrap/scss/utilities/borders";
 @import "~bootstrap/scss/utilities/display";
 @import "~bootstrap/scss/utilities/flex";
 @import "~bootstrap/scss/utilities/position";
@@ -24,3 +26,6 @@
 
 // Grid flex layout
 @import "~bootstrap/scss/grid";
+
+// Components
+@import "~bootstrap/scss/nav";

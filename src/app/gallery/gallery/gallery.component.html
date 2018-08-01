@@ -1,3 +1,23 @@
-<p>
-  gallery works!
-</p>
+<!-- TODO: move nav logic to own component -->
+<nav class="d-flex align-items-stretch navbar fixed-top">
+
+  <div class="container d-flex align-items-stretch justify-content-between">
+    <div class="d-flex align-items-center justify-content-center navbar-brand">
+      <h1 class="mb-0">#Fr.Gallery</h1>
+    </div>
+
+    <button (click)="logout()"
+            type="button"
+            mat-flat-button
+            matTooltip="{{ 'LOGOUT' | translate }}">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </div>
+
+</nav>
+
+<main class="container d-flex justify-content-center">
+  <h2 class="mt-4">
+    Coming soon =_=
+  </h2>
+</main>

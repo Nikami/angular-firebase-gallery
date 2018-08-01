@@ -4,6 +4,8 @@ import { IUser } from '../../shared/shared.models';
 import { User } from 'firebase';
 import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
 import { CookieService } from 'ngx-cookie';
+import { Router } from '@angular/router';
+import { COOKIE, ROUTES } from '../../app.config';
 
 export enum AUTH_SUBJECT {
   USER = 'user',
@@ -23,8 +25,9 @@ export class AuthService {
   };
 
   constructor(private firebaseAuth: AngularFireAuth,
-              private cookie: CookieService) {
-    this.subscribetoFbaseAuthState();
+              private cookie: CookieService,
+              private router: Router) {
+    this.subscribeToFbaseAuthState();
     this.subscribeToUser();
   }
 
@@ -36,7 +39,11 @@ export class AuthService {
   }
 
   public logout() {
-    this.firebaseAuth.auth.signOut().then(() => this.cookie.remove('token'));
+    this.firebaseAuth.auth.signOut()
+      .then(() => {
+        this.cookie.remove(COOKIE.TOKEN);
+        this.router.navigateByUrl(ROUTES.AUTH);
+      });
   }
 
   public get(key: keyof IAuthState): ReplaySubject<any> {
@@ -47,7 +54,7 @@ export class AuthService {
     (<any>this.state[key]).next(value);
   }
 
-  private subscribetoFbaseAuthState(): void {
+  private subscribeToFbaseAuthState(): void {
     this.firebaseAuth.authState.subscribe((user: User) => {
       this.set(AUTH_SUBJECT.USER, user);
     });
@@ -57,9 +64,10 @@ export class AuthService {
     this.get(AUTH_SUBJECT.USER).subscribe(async (user: User) => {
       if (user) {
         const userToken = await user.getIdTokenResult();
-        this.cookie.put('token', userToken.token, {expires: userToken.expirationTime});
+        this.cookie.put(COOKIE.TOKEN, userToken.token, {expires: userToken.expirationTime});
+        this.router.navigateByUrl(ROUTES.GALLERY);
       } else {
-        this.cookie.remove('token');
+        this.cookie.remove(COOKIE.TOKEN);
       }
     });
   }

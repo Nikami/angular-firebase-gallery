@@ -1,0 +1,16 @@
+@import "../../shared/styles/_variables";
+
+$nav-height: 4.5em;
+
+nav {
+  background-color: $primary-color;
+  height: $nav-height;
+}
+
+.navbar-brand {
+  color: $white-color;
+}
+
+main {
+  margin-top: $nav-height;
+}

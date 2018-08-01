@@ -4,6 +4,11 @@ import { GalleryGuard } from './services/gallery.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'gallery'
+  },
+  {
     path: 'gallery',
     pathMatch: 'full',
     component: GalleryComponent,

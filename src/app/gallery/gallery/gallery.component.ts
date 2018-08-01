@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'afg-gallery',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
+  @HostBinding('class') classList: string = 'd-flex flex-column w-100';
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.auth.logout();
+  }
 }

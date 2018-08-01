@@ -1,10 +1,10 @@
 <mat-card>
 
-  <mat-card-title class="text-center">
-    <div class="title text-uppercase">
-      Gallery Login
-    </div>
-    <div class="sub-title text-uppercase">
+  <mat-card-title class="text-center mb-4">
+    <div class="title font-weight-bold">
+      {{ 'LOGIN.TITLE' | translate }}
+      <br>
+      {{ 'LOGIN.SUB_TITLE' | translate }}
     </div>
   </mat-card-title>
 
@@ -32,15 +32,6 @@
               class="mt-4">
         Login
       </button>
-
-      <button (click)="logout()"
-              type="button"
-              mat-raised-button
-              color="accent"
-              class="mt-4">
-        Logout
-      </button>
-
     </form>
 
   </mat-card-content>
