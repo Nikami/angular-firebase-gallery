@@ -1,0 +1,51 @@
+<div afgDropZone
+     (hovered)="toggleHover($event)"
+     (dropped)="startUpload($event)"
+     [class.hovering]="isHovering"
+     class="dropzone d-flex align-items-stretch justify-content-center">
+
+  <label class="d-flex flex-column align-items-center justify-content-center file-label w-100">
+
+    <h3>Drag and Drop Image</h3>
+
+    <input (change)="startUpload($event.target.files)"
+           type="file" multiple
+           class="d-none">
+
+    <span class="d-flex align-items-center justify-content-center">
+      <mat-icon class="mr-2">cloud_upload</mat-icon>
+      <span class="file-label">
+        or choose a file
+      </span>
+    </span>
+
+  </label>
+
+</div>
+
+<div *ngIf="percentage | async as pct">
+
+  <progress class="progress is-info"
+            [value]="pct"
+            max="100">
+  </progress>
+
+  {{ pct | number }}%
+
+</div>
+
+
+<div *ngIf="snapshot | async as snap">
+  {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
+
+  <div *ngIf="downloadURL | async as url">
+    <h3>Results!</h3>
+    <img [src]="url"><br>
+    <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
+  </div>
+
+  <button (click)="task.pause()" class="button is-warning" [disabled]="!isActive(snap)">Pause</button>
+  <button (click)="task.cancel()" class="button is-danger" [disabled]="!isActive(snap)">Cancel</button>
+  <button (click)="task.resume()" class="button is-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
+
+</div>

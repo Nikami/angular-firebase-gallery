@@ -1,0 +1,26 @@
+@import "../../styles/variables";
+
+.dropzone {
+  background-color: $white-color;
+  border: 0.2rem dashed $primary-color;
+  border-radius: 0.5rem;
+  color: $text-color;
+  height: 20rem;
+  width: 35rem;
+  margin: 1rem 0;
+  padding: 1rem;
+
+  &.hovering {
+    border-style: solid;
+    border-color: $accent-color;
+    color: $text-color3;
+  }
+}
+
+.file-label {
+  cursor: pointer;
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}

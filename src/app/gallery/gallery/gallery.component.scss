@@ -2,6 +2,10 @@
 
 $nav-height: 4.5em;
 
+:host {
+  background-color: $bg-color;
+}
+
 nav {
   background-color: $primary-color;
   height: $nav-height;
