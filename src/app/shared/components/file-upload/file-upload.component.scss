@@ -21,6 +21,7 @@
   cursor: pointer;
 }
 
-progress::-webkit-progress-value {
-  transition: width 0.1s ease;
+.progress {
+  font-size: 1.6rem;
+  height: 2rem;
 }

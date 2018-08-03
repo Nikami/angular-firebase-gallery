@@ -1,4 +1,5 @@
-<div afgDropZone
+<div *ngIf="uploadedFiles.length === 0"
+     afgDropZone
      (hovered)="toggleHover($event)"
      (dropped)="startUpload($event)"
      [class.hovering]="isHovering"
@@ -23,29 +24,43 @@
 
 </div>
 
-<div *ngIf="percentage | async as pct">
 
-  <progress class="progress is-info"
-            [value]="pct"
-            max="100">
-  </progress>
+<div *ngIf="uploadedFiles.length > 0" class="d-flex justify-content-center flex-column w-100">
+  <mat-card *ngFor="let file of uploadedFiles; let idx = index" class="mb-4 w-100">
+    <mat-card-content>
+      <div class="d-flex">
+    <span>
+      {{ idx + 1 }}.
+    </span>
+        &nbsp;
+        <span>
+      {{ file.name }}
+    </span>
+        &nbsp;-&nbsp;
+        <span>
+      {{ file.size | fileSize }}
+    </span>
+      </div>
 
-  {{ pct | number }}%
+      <div class="progress">
+        <div [attr.aria-valuenow]="(file.progress | async)"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             role="progressbar"
+             class="progress-bar w-100">
 
-</div>
+          {{ (file.progress | async) | number }}%
 
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-<div *ngIf="snapshot | async as snap">
-  {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
-
-  <div *ngIf="downloadURL | async as url">
-    <h3>Results!</h3>
-    <img [src]="url"><br>
-    <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
-  </div>
-
-  <button (click)="task.pause()" class="button is-warning" [disabled]="!isActive(snap)">Pause</button>
-  <button (click)="task.cancel()" class="button is-danger" [disabled]="!isActive(snap)">Cancel</button>
-  <button (click)="task.resume()" class="button is-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
-
+  <button (click)="clearUploadedFiles()"
+          type="button"
+          mat-raised-button
+          color="primary"
+          class="mt-4">
+    Upload more
+  </button>
 </div>

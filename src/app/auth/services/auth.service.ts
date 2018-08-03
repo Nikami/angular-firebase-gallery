@@ -32,6 +32,7 @@ export class AuthService {
   }
 
   public login(credentials: IUser): void {
+    this.cookie.remove(COOKIE.TOKEN);
     this.firebaseAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)
       .catch((err: Error) => {
         this.set(AUTH_SUBJECT.ERROR, err.message);
@@ -62,8 +63,10 @@ export class AuthService {
 
   private subscribeToUser(): void {
     this.get(AUTH_SUBJECT.USER).subscribe(async (user: User) => {
+      console.log('user =', user);
       if (user) {
         const userToken = await user.getIdTokenResult();
+        console.log('userToken =', userToken);
         this.cookie.put(COOKIE.TOKEN, userToken.token, {expires: userToken.expirationTime});
         this.router.navigateByUrl(ROUTES.GALLERY);
       } else {

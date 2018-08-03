@@ -3,8 +3,11 @@
 @import "~bootstrap/scss/variables";
 
 // Mixins
+@import "~bootstrap/scss/mixins/background-variant";
 @import "~bootstrap/scss/mixins/breakpoints";
 @import "~bootstrap/scss/mixins/border-radius";
+@import "~bootstrap/scss/mixins/box-shadow";
+@import "~bootstrap/scss/mixins/gradients";
 @import "~bootstrap/scss/mixins/grid-framework";
 @import "~bootstrap/scss/mixins/grid";
 @import "~bootstrap/scss/mixins/hover";
@@ -12,14 +15,18 @@
 @import "~bootstrap/scss/mixins/text-emphasis";
 @import "~bootstrap/scss/mixins/text-hide";
 @import "~bootstrap/scss/mixins/text-truncate";
+@import "~bootstrap/scss/mixins/transition";
+@import "~bootstrap/scss/mixins/visibility";
 
 // Utilities
+@import "~bootstrap/scss/utilities/background";
 @import "~bootstrap/scss/utilities/borders";
 @import "~bootstrap/scss/utilities/display";
 @import "~bootstrap/scss/utilities/flex";
 @import "~bootstrap/scss/utilities/position";
 @import "~bootstrap/scss/utilities/spacing";
 @import "~bootstrap/scss/utilities/text";
+@import "~bootstrap/scss/utilities/visibility";
 
 // Reboot css
 @import "~bootstrap/scss/reboot";
@@ -29,3 +36,4 @@
 
 // Components
 @import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/progress";
