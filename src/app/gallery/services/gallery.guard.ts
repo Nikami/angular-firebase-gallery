@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, CanActivateChild, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { COOKIE, ROUTES } from '../../app.config';
 
 @Injectable()
-export class GalleryGuard implements CanActivate {
+export class GalleryGuard implements CanActivate, CanActivateChild {
   constructor(private cookie: CookieService,
               private router: Router) {
   }
@@ -16,5 +16,9 @@ export class GalleryGuard implements CanActivate {
       this.router.navigateByUrl(ROUTES.AUTH);
       return false;
     }
+  }
+
+  canActivateChild(): boolean {
+    return this.canActivate();
   }
 }

@@ -1,5 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { AuthService } from '../../auth/services/auth.service';
+import { AuthService } from '../auth/services/auth.service';
+import { GalleryService } from './services/gallery.service';
 
 @Component({
   selector: 'afg-gallery',
@@ -9,7 +10,8 @@ import { AuthService } from '../../auth/services/auth.service';
 export class GalleryComponent implements OnInit {
   @HostBinding('class') classList: string = 'd-flex flex-column w-100';
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService) {
+  }
 
   ngOnInit() {
   }

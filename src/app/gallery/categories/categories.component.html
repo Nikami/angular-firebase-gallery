@@ -1,0 +1,7 @@
+<div *ngFor="let category of categories$ | async" class="col-4">
+  <mat-card>
+    <mat-card-title>
+      {{ category.name }}
+    </mat-card-title>
+  </mat-card>
+</div>

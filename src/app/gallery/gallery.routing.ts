@@ -1,18 +1,19 @@
 import { RouterModule, Routes } from '@angular/router';
-import { GalleryComponent } from './gallery/gallery.component';
+import { GalleryComponent } from './gallery.component';
 import { GalleryGuard } from './services/gallery.guard';
+import { CategoriesComponent } from './categories/categories.component';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'gallery'
-  },
-  {
     path: 'gallery',
-    pathMatch: 'full',
     component: GalleryComponent,
-    canActivate: [GalleryGuard]
+    canActivate: [GalleryGuard],
+    children: [
+      {
+        path: 'categories',
+        component: CategoriesComponent
+      }
+    ]
   }
 ];
 
