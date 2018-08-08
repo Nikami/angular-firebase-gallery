@@ -28,7 +28,6 @@ export class AuthService {
               private cookie: CookieService,
               private router: Router) {
     this.subscribeToFbaseAuthState();
-    this.subscribeToUser();
   }
 
   public login(credentials: IUser): void {
@@ -56,21 +55,24 @@ export class AuthService {
   }
 
   private subscribeToFbaseAuthState(): void {
-    this.firebaseAuth.authState.subscribe((user: User) => {
-      this.set(AUTH_SUBJECT.USER, user);
-    });
-  }
-
-  private subscribeToUser(): void {
-    this.get(AUTH_SUBJECT.USER).subscribe(async (user: User) => {
-      console.log('user =', user);
-      if (user) {
-        const userToken = await user.getIdTokenResult();
-        console.log('userToken =', userToken);
-        this.cookie.put(COOKIE.TOKEN, userToken.token, {expires: userToken.expirationTime});
-        this.router.navigateByUrl(ROUTES.GALLERY);
-      } else {
+    this.firebaseAuth.authState.subscribe(async (user: User) => {
+      if (!user) {
         this.cookie.remove(COOKIE.TOKEN);
+        return;
+      }
+
+      const userToken = await user.getIdTokenResult();
+      const currentDate = new Date();
+      const tokenExpDate = new Date(userToken.expirationTime);
+
+      console.log('currentDate =', currentDate);
+      console.log('tokenExpDate =', tokenExpDate);
+
+      if (currentDate < tokenExpDate) {
+        this.cookie.put(COOKIE.TOKEN, userToken.token, { expires: userToken.expirationTime });
+        this.router.navigateByUrl(ROUTES.DEFAULT);
+      } else {
+        this.logout();
       }
     });
   }

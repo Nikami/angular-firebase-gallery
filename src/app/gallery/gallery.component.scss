@@ -1,24 +1,11 @@
 @import "../shared/styles/variables";
-
-$nav-height: 4.5em;
+@import "./navigation/navigation.component";
 
 :host {
   background-color: $bg-color;
 }
 
-nav {
-  background-color: $primary-color;
-  height: $nav-height;
-}
-
-.navbar-brand {
-  color: $white-color;
-  font-family: Roboto Mono;
-  font-weight: normal;
-  font-size: 1.6rem;
-}
-
 main {
   margin-top: $nav-height;
-  padding-top: $nav-height;
+  padding-top: 5rem;
 }

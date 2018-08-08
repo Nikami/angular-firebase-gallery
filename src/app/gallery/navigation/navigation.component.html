@@ -1,0 +1,33 @@
+<div class="container">
+
+  <div class="d-flex align-items-stretch justify-content-between mt-4">
+
+    <h1 class="d-flex align-items-center justify-content-center navbar-brand mb-0 text-uppercase">
+      <span class="accent-text2">#&nbsp;</span>Fg.<span class="accent-text2">G</span>allery
+    </h1>
+
+    <button (click)="logout()"
+            type="button"
+            mat-mini-fab
+            matTooltip="{{ 'LOGOUT' | translate }}"
+            class="logout-btn">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <nav mat-tab-nav-bar class="">
+
+    <a *ngFor="let route of routes"
+       mat-tab-link [routerLink]="route.path"
+       routerLinkActive #rla1="routerLinkActive"
+       [active]="rla1.isActive"
+       class="text-uppercase">
+      {{ route.title }}
+    </a>
+
+  </nav>
+
+</div>

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { DB, IFGalleryCategory } from '../../shared/shared.models';
 import { AngularFirestoreCollection } from 'angularfire2/firestore/collection/collection';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class CategoriesService {
@@ -13,6 +14,20 @@ export class CategoriesService {
   }
 
   get(): Observable<IFGalleryCategory[]> {
-    return this.categories.valueChanges();
+    return this.categories.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as IFGalleryCategory;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
+  getImages(pushId: string) {
+    const categoryRef = this.categories.doc(pushId).ref;
+    return this.db.collection(DB.images, ref => ref.where('category', '==', categoryRef))
+      .valueChanges();
   }
 }

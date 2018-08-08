@@ -1,0 +1,43 @@
+@import "../../shared/styles/variables";
+
+$nav-height: 11.5rem;
+
+.navbar {
+  background-color: $primary-color;
+  height: $nav-height;
+}
+
+.logout-btn {
+  color: rgba($white-color, 0.6);
+  cursor: pointer;
+  padding: 0;
+
+  .mat-icon {
+    height: 18px;
+    width: 18px;
+    font-size: 18px;
+    line-height: normal;
+  }
+}
+
+.divider {
+  border-top: 2px solid rgba($white-color, 0.1);
+  margin-top: 10px;
+}
+
+.navbar-brand {
+  color: $white-color;
+  font-family: Roboto Mono;
+  font-weight: normal;
+  font-size: 1.6rem;
+}
+
+.mat-tab-label, .mat-tab-link {
+  font-family: Roboto Mono;
+  color: $white-color;
+  text-decoration: none;
+}
+
+:host /deep/ .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: $accent-color2;
+}

@@ -2,19 +2,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { GalleryComponent } from './gallery.component';
 import { GalleryGuard } from './services/gallery.guard';
 import { CategoriesComponent } from './categories/categories.component';
+import { UploadComponent } from './upload/upload.component';
+import { ROUTES } from '../app.config';
 
-const routes: Routes = [
+export const GALLERY_ROUTES: Routes = [
   {
-    path: 'gallery',
+    path: ROUTES.GALLERY,
     component: GalleryComponent,
     canActivate: [GalleryGuard],
     children: [
       {
-        path: 'categories',
+        path: ROUTES.CATEGORIES,
         component: CategoriesComponent
+      },
+      {
+        path: ROUTES.UPLOAD,
+        component: UploadComponent
       }
     ]
   }
 ];
 
-export const GalleryRouting = RouterModule.forChild(routes);
+export const GalleryRouting = RouterModule.forChild(GALLERY_ROUTES);

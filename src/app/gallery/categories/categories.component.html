@@ -1,5 +1,5 @@
-<div *ngFor="let category of categories$ | async" class="col-4">
-  <mat-card>
+<div *ngFor="let category of categories$ | async" class="col-md-4 col-12 mb-4">
+  <mat-card (click)="selectCategory(category.id)">
     <mat-card-title>
       {{ category.name }}
     </mat-card-title>

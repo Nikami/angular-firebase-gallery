@@ -8,5 +8,8 @@ export enum COOKIE {
 
 export enum ROUTES {
   AUTH = 'auth',
-  GALLERY = 'gallery/categories'
+  DEFAULT = 'gallery/categories',
+  GALLERY = 'gallery',
+  CATEGORIES = 'categories',
+  UPLOAD = 'upload'
 }

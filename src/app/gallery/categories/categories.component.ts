@@ -14,9 +14,18 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private categories: CategoriesService) {
     this.categories$ = this.categories.get();
+    this.categories$.subscribe((categories) => {
+      console.log('categories =', categories);
+    });
   }
 
   ngOnInit() {
+  }
+
+  selectCategory(id: string): void {
+    this.categories.getImages(id).subscribe((im) => {
+      console.log('im =', im);
+    });
   }
 
 }

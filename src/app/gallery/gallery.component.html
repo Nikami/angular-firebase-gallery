@@ -1,23 +1,5 @@
-<!-- TODO: move nav logic to own component -->
-<nav class="d-flex align-items-stretch navbar fixed-top">
-
-  <div class="container d-flex align-items-stretch justify-content-between">
-
-    <h1 class="d-flex align-items-center justify-content-center navbar-brand mb-0 text-uppercase">
-      #Fr.Gallery
-    </h1>
-
-    <button (click)="logout()"
-            type="button"
-            mat-flat-button
-            matTooltip="{{ 'LOGOUT' | translate }}">
-      <mat-icon>exit_to_app</mat-icon>
-    </button>
-  </div>
-
-</nav>
+<afg-navigation></afg-navigation>
 
 <main class="container d-flex">
-  <!--<afg-file-upload></afg-file-upload>-->
   <router-outlet></router-outlet>
 </main>
