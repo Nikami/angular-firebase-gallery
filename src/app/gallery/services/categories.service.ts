@@ -4,6 +4,7 @@ import { DB, IFGalleryCategory } from '../../shared/shared.models';
 import { AngularFirestoreCollection } from 'angularfire2/firestore/collection/collection';
 import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
+import { DocumentChangeAction } from 'angularfire2/firestore/interfaces';
 
 @Injectable()
 export class CategoriesService {
@@ -15,10 +16,10 @@ export class CategoriesService {
 
   get(): Observable<IFGalleryCategory[]> {
     return this.categories.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as IFGalleryCategory;
-          const id = a.payload.doc.id;
+      map((actions: DocumentChangeAction<IFGalleryCategory>[]) => {
+        return actions.map((a: DocumentChangeAction<IFGalleryCategory>) => {
+          const data: IFGalleryCategory = a.payload.doc.data();
+          const id: string = a.payload.doc.id;
           return { id, ...data };
         });
       })
