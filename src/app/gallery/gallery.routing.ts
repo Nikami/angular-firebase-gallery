@@ -4,6 +4,7 @@ import { GalleryGuard } from './services/gallery.guard';
 import { CategoriesComponent } from './categories/categories.component';
 import { UploadComponent } from './upload/upload.component';
 import { ROUTES } from '../app.config';
+import { ImagesComponent } from './images/images.component';
 
 export const GALLERY_ROUTES: Routes = [
   {
@@ -18,6 +19,10 @@ export const GALLERY_ROUTES: Routes = [
       {
         path: ROUTES.UPLOAD,
         component: UploadComponent
+      },
+      {
+        path: ROUTES.IMAGES,
+        component: ImagesComponent
       }
     ]
   }

@@ -5,15 +5,19 @@ export class UploadedFile {
   _size: number;
   _url: string;
   _progess: Observable<number>;
+  _isInProgress: boolean = true;
 
   constructor(fName: string,
               fSize: number,
-              fUrl: string,
               fProgress: Observable<number>) {
     this._name = fName;
     this._size = fSize;
-    this._url = fUrl;
     this._progess = fProgress;
+    this._progess.subscribe((n: number) => {
+      if (n === 100) {
+        this._isInProgress = false;
+      }
+    });
   }
 
   get name(): string {
@@ -28,7 +32,15 @@ export class UploadedFile {
     return this._url;
   }
 
+  set url(path: string) {
+    this._url = path;
+  }
+
   get progress(): Observable<number> {
     return this._progess;
+  }
+
+  get isInProgress(): boolean {
+    return this._isInProgress;
   }
 }

@@ -1,7 +1,14 @@
-<div *ngFor="let category of categories$ | async" class="col-md-4 col-12 mb-4">
-  <mat-card (click)="selectCategory(category.id)">
+<div *ngFor="let category of categories$ | async"
+     class="col-md-4 col-12 mb-4">
+
+  <mat-card [routerLink]="['/gallery/images']"
+            [queryParams]="{ filter: category.id }"
+            class="text-center">
+
     <mat-card-title>
       {{ category.name }}
     </mat-card-title>
+
   </mat-card>
+
 </div>

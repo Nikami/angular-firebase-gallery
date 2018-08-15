@@ -3,5 +3,11 @@
     "TITLE": "Fragments",
     "SUB_TITLE": "Gallery"
   },
+  "UPLOAD": {
+    "UPLOAD_IMAGES": "Upload",
+    "DRAG_DROP": "Drag & Drop images anywhere here",
+    "OPEN_IMAGE_NEW_TAB": "See full size",
+    "LINK_LABEL": "Link URL:"
+  },
   "LOGOUT": "Logout"
 }

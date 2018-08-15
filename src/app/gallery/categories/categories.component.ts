@@ -22,10 +22,4 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectCategory(id: string): void {
-    this.categories.getImages(id).subscribe((im) => {
-      console.log('im =', im);
-    });
-  }
-
 }

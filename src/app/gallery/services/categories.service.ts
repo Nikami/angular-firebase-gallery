@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { DB, IFGalleryCategory } from '../../shared/shared.models';
 import { AngularFirestoreCollection } from 'angularfire2/firestore/collection/collection';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -25,9 +25,7 @@ export class CategoriesService {
     );
   }
 
-  getImages(pushId: string) {
-    const categoryRef = this.categories.doc(pushId).ref;
-    return this.db.collection(DB.images, ref => ref.where('category', '==', categoryRef))
-      .valueChanges();
+  getCategoryRefById(pushId: string): DocumentReference {
+    return this.categories.doc(pushId).ref;
   }
 }

@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from './material';
 import { DropZoneDirective } from './directives/drop-zone.directive';
-import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { FileSizePipe } from './pipes/file-size.pipe';
+import { InputSelectionDirective } from './directives/input-selection.directive';
 
 
-const COMPONENTS = [DropZoneDirective, FileUploadComponent, FileSizePipe];
+const COMPONENTS = [DropZoneDirective, FileSizePipe, InputSelectionDirective];
 
 const services = [];
 

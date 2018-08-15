@@ -1,1 +1,118 @@
-<afg-file-upload></afg-file-upload>
+<h1 class="heading">
+
+  <span class="grate mr-3">#</span>
+
+  {{ 'UPLOAD.UPLOAD_IMAGES' | translate }}
+
+</h1>
+
+<div (hovered)="toggleHover($event)"
+     (dropped)="startUpload($event)"
+     afgDropZone
+     [class.hovering]="isHovering"
+     class="dropzone d-flex align-items-stretch">
+
+  <label class="d-flex flex-column align-items-stretch justify-content-center file-label w-100 mb-0">
+
+    <input #uploadInput
+           (change)="startUpload($event.target.files)"
+           type="file" multiple
+           class="d-none">
+
+    <span class="row no-gutters d-flex align-items-stretch h-100">
+
+        <span class="dnd-text text-uppercase col d-flex align-items-center justify-content-center">
+          {{ 'UPLOAD.DRAG_DROP' | translate }}
+        </span>
+
+        <button mat-raised-button
+                (click)="uploadInput.click()"
+                color="primary"
+                type="button"
+                class="col-auto d-flex align-items-center justify-content-center">
+
+          <mat-icon>cloud_upload</mat-icon>
+
+        </button>
+
+      </span>
+
+  </label>
+
+</div>
+
+
+<div *ngIf="uploadedFiles.length > 0" class="uploaded-images w-100 mt-4">
+
+  <mat-card *ngFor="let file of uploadedFiles; let idx = index" class="w-100">
+
+    <mat-card-content class="d-flex align-items-center">
+
+      <div class="img-container mr-5">
+
+        <a *ngIf="file.url"
+           matTooltip="{{ 'UPLOAD.OPEN_IMAGE_NEW_TAB' | translate }}"
+           href="{{ file.url }}"
+           target="_blank">
+
+          <img src="{{ file.url }}" class="img-fluid">
+
+        </a>
+
+      </div>
+
+      <div class="col">
+
+        <div class="d-flex">
+          <div>
+            {{ idx + 1 }}.
+          </div>
+          &nbsp;
+          <div>
+            {{ file.name }}
+          </div>
+          &nbsp;-&nbsp;
+          <div>
+            {{ file.size | fileSize }}
+          </div>
+        </div>
+
+        <div>
+
+          <div class="progress mb-4">
+
+            <div [attr.aria-valuenow]="(file.progress | async) | number:'1.0-0'"
+                 [style.width.%]="(file.progress | async) | number:'1.0-0'"
+                 [ngClass]="{'progress-bar-animated': file.isInProgress}"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 role="progressbar"
+                 class="progress-bar progress-bar-striped">
+
+              {{ (file.progress | async) | number:'1.0-0'}}%
+
+            </div>
+
+          </div>
+
+          <mat-form-field *ngIf="file.url" class="w-100">
+
+            <input matInput
+                   afgInputSelection=""
+                   [value]="file.url"
+                   [placeholder]="'UPLOAD.LINK_LABEL' | translate"
+                   type="text"
+                   readonly
+                   class="w-100">
+
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

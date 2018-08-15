@@ -1,0 +1,60 @@
+@import "../../shared/styles/variables";
+
+$uploader-height: 16.5rem;
+$uploader-margin-bottom: 1.5rem;
+
+.dropzone {
+  background-color: $white-color;
+  border: 0.2rem dashed $primary-color;
+  border-radius: 0.5rem;
+  color: $text-color;
+  margin: 1rem 0;
+  outline: none;
+
+  &:focus {
+    background-color: $white-color;
+  }
+
+  &.hovering {
+    border-style: solid;
+    border-color: $accent-color3;
+    color: $text-color3;
+  }
+
+  /deep/ .mat-button-wrapper {
+    display: flex;
+    text-align: center;
+    padding: 0;
+  }
+}
+
+.img-container {
+  max-width: 15rem;
+}
+
+.file-label {
+  height: 10rem;
+  cursor: pointer;
+}
+
+.dnd-text {
+  font-size: 2.2rem;
+  font-family: Roboto Mono;
+  color: $text-color4;
+  padding: 1rem;
+}
+
+.uploaded-images {
+  max-height: ($uploader-height + $uploader-margin-bottom) * 3;
+  overflow-y: auto;
+}
+
+mat-card {
+  height: $uploader-height;
+  margin-bottom: $uploader-margin-bottom;
+}
+
+.progress {
+  font-size: 1.2rem;
+  height: 2rem;
+}

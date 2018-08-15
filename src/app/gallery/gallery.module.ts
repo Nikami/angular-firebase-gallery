@@ -10,6 +10,8 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CategoriesService } from './services/categories.service';
 import { UploadComponent } from './upload/upload.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ImagesComponent } from './images/images.component';
+import { ImagesService } from './services/images.service';
 
 @NgModule({
   imports: [
@@ -17,7 +19,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     SharedModule,
     GalleryRouting
   ],
-  declarations: [GalleryComponent, CategoriesComponent, UploadComponent, NavigationComponent],
-  providers: [AuthService, GalleryGuard, GalleryService, CategoriesService]
+  declarations: [GalleryComponent, CategoriesComponent, UploadComponent, NavigationComponent, ImagesComponent],
+  providers: [AuthService, GalleryGuard, GalleryService, CategoriesService, ImagesService]
 })
 export class GalleryModule { }

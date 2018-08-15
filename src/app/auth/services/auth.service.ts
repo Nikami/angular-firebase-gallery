@@ -69,8 +69,13 @@ export class AuthService {
       console.log('tokenExpDate =', tokenExpDate);
 
       if (currentDate < tokenExpDate) {
+        // TODO maybe remove this ot move to local storage
         this.cookie.put(COOKIE.TOKEN, userToken.token, { expires: userToken.expirationTime });
-        this.router.navigateByUrl(ROUTES.DEFAULT);
+
+        if (this.router.url === '/' + ROUTES.AUTH) {
+          this.router.navigateByUrl(ROUTES.DEFAULT);
+        }
+
       } else {
         this.logout();
       }
