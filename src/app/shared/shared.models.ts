@@ -1,3 +1,5 @@
+import { DocumentReference } from 'angularfire2/firestore';
+
 export interface IUser {
   email: string;
   password: string;
@@ -9,8 +11,9 @@ export interface IFGalleryCategory {
 }
 
 export interface IFGalleryItem {
-  category: string;
-  name: string;
+  uid: string;
+  category: DocumentReference;
+  title: string;
   order: number;
   url: string;
 }

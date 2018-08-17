@@ -2,7 +2,7 @@
      class="col-md-4 col-12 mb-4">
 
   <mat-card [routerLink]="['/gallery/images']"
-            [queryParams]="{ filter: category.id }"
+            [queryParams]="makeQueryParams(category)"
             class="text-center">
 
     <mat-card-title>

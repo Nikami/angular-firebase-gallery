@@ -19,11 +19,11 @@ export class NavigationComponent {
     {
       title: 'Gallery',
       path: ROUTES.CATEGORIES
-    },
-    {
-      title: 'Upload',
-      path: ROUTES.UPLOAD
     }
+    //{
+    //  title: 'Upload',
+    //  path: ROUTES.UPLOAD
+    //}
   ];
 
   constructor(private auth: AuthService) {

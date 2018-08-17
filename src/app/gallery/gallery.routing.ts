@@ -17,10 +17,6 @@ export const GALLERY_ROUTES: Routes = [
         component: CategoriesComponent
       },
       {
-        path: ROUTES.UPLOAD,
-        component: UploadComponent
-      },
-      {
         path: ROUTES.IMAGES,
         component: ImagesComponent
       }

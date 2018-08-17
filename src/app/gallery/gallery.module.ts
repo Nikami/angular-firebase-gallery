@@ -19,7 +19,8 @@ import { ImagesService } from './services/images.service';
     SharedModule,
     GalleryRouting
   ],
-  declarations: [GalleryComponent, CategoriesComponent, UploadComponent, NavigationComponent, ImagesComponent],
+  declarations: [GalleryComponent, CategoriesComponent, NavigationComponent, ImagesComponent, UploadComponent],
+  entryComponents: [UploadComponent],
   providers: [AuthService, GalleryGuard, GalleryService, CategoriesService, ImagesService]
 })
 export class GalleryModule { }

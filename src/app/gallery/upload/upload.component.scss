@@ -1,6 +1,6 @@
 @import "../../shared/styles/variables";
 
-$uploader-height: 16.5rem;
+$uploader-height: 15.5rem;
 $uploader-margin-bottom: 1.5rem;
 
 .dropzone {
@@ -33,12 +33,12 @@ $uploader-margin-bottom: 1.5rem;
 }
 
 .file-label {
-  height: 10rem;
+  height: 8rem;
   cursor: pointer;
 }
 
 .dnd-text {
-  font-size: 2.2rem;
+  font-size: 1.6rem;
   font-family: Roboto Mono;
   color: $text-color4;
   padding: 1rem;
@@ -49,7 +49,7 @@ $uploader-margin-bottom: 1.5rem;
   overflow-y: auto;
 }
 
-mat-card {
+.uploaded-image {
   height: $uploader-height;
   margin-bottom: $uploader-margin-bottom;
 }

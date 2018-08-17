@@ -1,3 +1,38 @@
-<p>
-  images works!
-</p>
+<h1 class="heading">
+
+<span class="grate mr-3">#</span>
+
+{{ 'IMAGES.GALLERY' | translate }} // {{ categoryName }}
+
+</h1>
+
+<div class="row images align-items-stretch">
+
+  <div *ngFor="let img of imgs"
+       class="img-container d-flex col-md-4 col-12 mb-4">
+
+    <mat-card class="d-flex flex-column h-100 justify-content-between">
+
+      <a href="{{ img.url }}" target="_blank">
+        <img src="{{ img.url }}" alt="{{ img.title }}" class="img-fluid">
+      </a>
+
+      <mat-form-field class="mt-4">
+        <input matInput type="text" [value]="img.title" placeholder="Title">
+      </mat-form-field>
+
+    </mat-card>
+
+  </div>
+
+</div>
+
+<div class="container fixed-bottom d-flex justify-content-end">
+  <button (click)="openUploadDialog()"
+          matTooltip="{{ 'IMAGES.UPLOAD_IMG' | translate }}"
+          type="button"
+          mat-fab=""
+          class="mb-5">
+    +
+  </button>
+</div>

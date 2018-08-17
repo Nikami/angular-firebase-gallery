@@ -1,7 +1,15 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, Inject } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 import { UploadedFile } from './uploaded-file';
+import { ActivatedRoute } from '@angular/router';
+import { ImagesService } from '../services/images.service';
+import { UtilsService } from '../../core/http/utils.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+
+export interface IUploadData {
+  category: DocumentReference;
+}
 
 @Component({
   selector: 'afg-upload',
@@ -11,14 +19,19 @@ import { UploadedFile } from './uploaded-file';
 export class UploadComponent {
   @HostBinding('class') classList: string = 'w-100';
 
-  private BASE_PATH: string = 'me/smiles/me_';
+  private BASE_PATH: string = 'me/smiles/';
   private task: AngularFireUploadTask;
 
   uploadedFiles: Array<UploadedFile> = [];
   isHovering: boolean;
 
-  constructor(private storage: AngularFireStorage,
-              private db: AngularFirestore) {
+  constructor(private dialogRef: MatDialogRef<UploadComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: IUploadData,
+              private storage: AngularFireStorage,
+              private route: ActivatedRoute,
+              private db: AngularFirestore,
+              private images: ImagesService,
+              private utils: UtilsService) {
   }
 
   toggleHover(event: boolean) {
@@ -34,17 +47,26 @@ export class UploadComponent {
         return;
       }
 
-      const path = this.BASE_PATH + file.name;
+      const uid = this.utils.generateUID();
+      const path = this.BASE_PATH + uid;
       this.task = this.storage.upload(path, file);
 
       const fileRef = this.storage.ref(path);
-      const fileProgress = this.task.percentageChanges();
-      const uploadedFile: UploadedFile = new UploadedFile(file.name, file.size, fileProgress);
+      const uploadedFile: UploadedFile = new UploadedFile
+      (
+        uid,
+        file.name,
+        this.data.category,
+        file.size,
+        this.task.percentageChanges()
+      );
+
       this.uploadedFiles.push(uploadedFile);
 
       this.task.then(() => {
         fileRef.getDownloadURL().subscribe((url: string) => {
           uploadedFile.url = url;
+          this.images.add(uploadedFile.getItem());
         });
       });
     });
@@ -52,5 +74,10 @@ export class UploadComponent {
 
   clearUploadedFiles(): void {
     this.uploadedFiles = [];
+  }
+
+  closeDialog(): void {
+    this.clearUploadedFiles();
+    this.dialogRef.close();
   }
 }

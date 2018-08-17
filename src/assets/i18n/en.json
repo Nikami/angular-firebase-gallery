@@ -9,5 +9,10 @@
     "OPEN_IMAGE_NEW_TAB": "See full size",
     "LINK_LABEL": "Link URL:"
   },
-  "LOGOUT": "Logout"
+  "IMAGES": {
+    "UPLOAD_IMG": "Upload image",
+    "GALLERY": "Gallery"
+  },
+  "LOGOUT": "Logout",
+  "CLOSE": "Close"
 }

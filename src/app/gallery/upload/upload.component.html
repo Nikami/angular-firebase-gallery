@@ -1,4 +1,4 @@
-<h1 class="heading">
+<h1 mat-dialog-title class="heading">
 
   <span class="grate mr-3">#</span>
 
@@ -6,20 +6,22 @@
 
 </h1>
 
-<div (hovered)="toggleHover($event)"
-     (dropped)="startUpload($event)"
-     afgDropZone
-     [class.hovering]="isHovering"
-     class="dropzone d-flex align-items-stretch">
+<div mat-dialog-content>
 
-  <label class="d-flex flex-column align-items-stretch justify-content-center file-label w-100 mb-0">
+  <div (hovered)="toggleHover($event)"
+       (dropped)="startUpload($event)"
+       afgDropZone
+       [class.hovering]="isHovering"
+       class="dropzone d-flex align-items-stretch">
 
-    <input #uploadInput
-           (change)="startUpload($event.target.files)"
-           type="file" multiple
-           class="d-none">
+    <label class="d-flex flex-column align-items-stretch justify-content-center file-label w-100 mb-0">
 
-    <span class="row no-gutters d-flex align-items-stretch h-100">
+      <input #uploadInput
+             (change)="startUpload($event.target.files)"
+             type="file" multiple
+             class="d-none">
+
+      <span class="row no-gutters d-flex align-items-stretch h-100">
 
         <span class="dnd-text text-uppercase col d-flex align-items-center justify-content-center">
           {{ 'UPLOAD.DRAG_DROP' | translate }}
@@ -37,16 +39,13 @@
 
       </span>
 
-  </label>
+    </label>
 
-</div>
+  </div>
 
+  <div *ngIf="uploadedFiles.length > 0" class="uploaded-images w-100 mt-4">
 
-<div *ngIf="uploadedFiles.length > 0" class="uploaded-images w-100 mt-4">
-
-  <mat-card *ngFor="let file of uploadedFiles; let idx = index" class="w-100">
-
-    <mat-card-content class="d-flex align-items-center">
+    <div *ngFor="let file of uploadedFiles; let idx = index" class="uploaded-image d-flex align-items-center w-100">
 
       <div class="img-container mr-5">
 
@@ -69,7 +68,7 @@
           </div>
           &nbsp;
           <div>
-            {{ file.name }}
+            {{ file.title }}
           </div>
           &nbsp;-&nbsp;
           <div>
@@ -111,8 +110,13 @@
 
       </div>
 
-    </mat-card-content>
+    </div>
 
-  </mat-card>
+  </div>
 
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button
+          (click)="closeDialog()">Close</button>
 </div>

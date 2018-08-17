@@ -9,6 +9,7 @@ import { NotFoundInterceptor } from './http/notfound.interceptor';
 import { TimeoutInterceptor } from './http/timeout.interceptor';
 import { StorageService } from './http/storage.service';
 import { CookieModule, CookieService } from 'ngx-cookie';
+import { UtilsService } from './http/utils.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -39,7 +40,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true
     },
     StorageService,
-    CookieService
+    CookieService,
+    UtilsService
   ]
 })
 export class CoreModule {

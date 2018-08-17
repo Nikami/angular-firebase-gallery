@@ -1,16 +1,24 @@
 import { Observable } from 'rxjs/internal/Observable';
+import { IFGalleryItem } from '../../shared/shared.models';
+import { DocumentReference } from 'angularfire2/firestore';
 
 export class UploadedFile {
-  _name: string;
+  _uid: string;
+  _title: string;
+  _category: DocumentReference;
   _size: number;
   _url: string;
   _progess: Observable<number>;
   _isInProgress: boolean = true;
 
-  constructor(fName: string,
+  constructor(fUid: string,
+              fTitle: string,
+              fCategory: DocumentReference,
               fSize: number,
               fProgress: Observable<number>) {
-    this._name = fName;
+    this._uid = fUid;
+    this._title = fTitle;
+    this._category = fCategory;
     this._size = fSize;
     this._progess = fProgress;
     this._progess.subscribe((n: number) => {
@@ -20,8 +28,8 @@ export class UploadedFile {
     });
   }
 
-  get name(): string {
-    return this._name;
+  get title(): string {
+    return this._title;
   }
 
   get size(): number {
@@ -42,5 +50,15 @@ export class UploadedFile {
 
   get isInProgress(): boolean {
     return this._isInProgress;
+  }
+
+  getItem(): IFGalleryItem {
+    return {
+      uid: this._uid,
+      category: this._category,
+      title: this._title,
+      order: null,
+      url: this._url
+    };
   }
 }

@@ -24,4 +24,15 @@ export class ImagesService {
           });
         }));
   }
+
+  add(doc: IFGalleryItem): void {
+    console.log('doc =', doc);
+    try {
+      this.db.collection(DB.images).add(doc);
+    } catch {
+      console.log('shit');
+    } finally {
+      console.log('ok');
+    }
+  }
 }
