@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../services/images.service';
 import { IFGalleryItem } from '../../shared/shared.models';
@@ -6,13 +6,15 @@ import { DocumentReference } from 'angularfire2/firestore';
 import { CategoriesService } from '../services/categories.service';
 import { MatDialog } from '@angular/material';
 import { UploadComponent } from '../upload/upload.component';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'afg-images',
   templateUrl: './images.component.html',
   styleUrls: ['./images.component.scss']
 })
-export class ImagesComponent implements OnInit {
+export class ImagesComponent implements OnInit, OnDestroy {
+  private imagesSubscription: Subscription;
   private categoryId: string;
   public categoryName: string;
   public categoryRef: DocumentReference;
@@ -34,7 +36,7 @@ export class ImagesComponent implements OnInit {
   }
 
   subscribeToImages(): void {
-    this.images.getByCategoryRef(this.categoryRef).subscribe((images: IFGalleryItem[]) => {
+    this.imagesSubscription = this.images.getByCategoryRef(this.categoryRef).subscribe((images: IFGalleryItem[]) => {
       this.imgs = images;
     });
   }
@@ -54,5 +56,9 @@ export class ImagesComponent implements OnInit {
 
   editTitle(img: IFGalleryItem, title: string): void {
     this.images.rename(img, title);
+  }
+
+  ngOnDestroy(): void {
+    this.imagesSubscription.unsubscribe();
   }
 }

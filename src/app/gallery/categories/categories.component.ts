@@ -1,7 +1,7 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { CategoriesService } from '../services/categories.service';
-import { Observable } from 'rxjs/internal/Observable';
 import { IFGalleryCategory } from '../../shared/shared.models';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 interface IQueryParams {
   id: string;
@@ -13,12 +13,22 @@ interface IQueryParams {
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent {
+export class CategoriesComponent implements OnInit, OnDestroy {
   @HostBinding('class') classList: string = 'row flex-wrap w-100';
-  categories$: Observable<IFGalleryCategory[]>;
+  public ctgs: IFGalleryCategory[] = [];
+  private categoriesSubscription: Subscription;
 
   constructor(private categories: CategoriesService) {
-    this.categories$ = this.categories.get();
+  }
+
+  ngOnInit(): void {
+    this.subscibeToCategories();
+  }
+
+  subscibeToCategories(): void {
+    this.categoriesSubscription = this.categories.get().subscribe((categories: IFGalleryCategory[]) => {
+      this.ctgs = categories;
+    });
   }
 
   makeQueryParams(category: IFGalleryCategory): IQueryParams {
@@ -26,5 +36,9 @@ export class CategoriesComponent {
       id: category.id,
       name: category.name
     };
+  }
+
+  ngOnDestroy(): void {
+    this.categoriesSubscription.unsubscribe();
   }
 }

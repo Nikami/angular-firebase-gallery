@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { IUser } from '../../shared/shared.models';
 import { User } from 'firebase';
@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { COOKIE, ROUTES } from '../../app.config';
 
 export enum AUTH_SUBJECT {
-  USER = 'user',
   ERROR = 'error'
 }
 
@@ -42,7 +41,7 @@ export class AuthService {
     this.firebaseAuth.auth.signOut()
       .then(() => {
         this.cookie.remove(COOKIE.TOKEN);
-        this.router.navigateByUrl(ROUTES.AUTH);
+        window.location.reload();
       });
   }
 
