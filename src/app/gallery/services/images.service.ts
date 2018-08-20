@@ -4,11 +4,14 @@ import { AngularFirestore, CollectionReference, DocumentReference } from 'angula
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { DocumentChangeAction } from 'angularfire2/firestore/interfaces';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { FIRE_STORAGE_PATH } from '../../app.config';
 
 @Injectable()
 export class ImagesService {
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore,
+              private storage: AngularFireStorage) {
   }
 
   getByCategoryRef(categoryRef: DocumentReference): Observable<IFGalleryItem[]> {
@@ -26,13 +29,20 @@ export class ImagesService {
   }
 
   add(doc: IFGalleryItem): void {
-    console.log('doc =', doc);
     try {
       this.db.collection(DB.images).add(doc);
     } catch {
-      console.log('shit');
-    } finally {
-      console.log('ok');
+      console.error('trouble');
     }
+  }
+
+  rename(doc: IFGalleryItem, title): void {
+    this.db.collection(DB.images).doc(doc.id).update({title: title});
+  }
+
+  remove(doc: IFGalleryItem): void {
+    this.db.collection(DB.images).doc(doc.id).delete().then(() => {
+      this.storage.ref(FIRE_STORAGE_PATH).child(doc.uid).delete();
+    });
   }
 }

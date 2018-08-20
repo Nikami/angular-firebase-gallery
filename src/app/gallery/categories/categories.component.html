@@ -5,8 +5,11 @@
             [queryParams]="makeQueryParams(category)"
             class="text-center">
 
-    <mat-card-title>
-      {{ category.name }}
+    <mat-card-title class="d-flex align-items-center">
+      <mat-icon class="mr-4">photo_library</mat-icon>
+      <span>
+        {{ category.name }}
+      </span>
     </mat-card-title>
 
   </mat-card>

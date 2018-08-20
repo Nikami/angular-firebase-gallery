@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../services/images.service';
 import { UtilsService } from '../../core/http/utils.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FIRE_STORAGE_PATH } from '../../app.config';
 
 export interface IUploadData {
   category: DocumentReference;
@@ -19,7 +20,6 @@ export interface IUploadData {
 export class UploadComponent {
   @HostBinding('class') classList: string = 'w-100';
 
-  private BASE_PATH: string = 'me/smiles/';
   private task: AngularFireUploadTask;
 
   uploadedFiles: Array<UploadedFile> = [];
@@ -48,7 +48,7 @@ export class UploadComponent {
       }
 
       const uid = this.utils.generateUID();
-      const path = this.BASE_PATH + uid;
+      const path = FIRE_STORAGE_PATH + uid;
       this.task = this.storage.upload(path, file);
 
       const fileRef = this.storage.ref(path);

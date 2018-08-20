@@ -14,3 +14,5 @@ export enum ROUTES {
   UPLOAD = 'upload',
   IMAGES = 'images'
 }
+
+export const FIRE_STORAGE_PATH = 'me/smiles/';

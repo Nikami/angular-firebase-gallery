@@ -16,6 +16,7 @@ export class ImagesComponent implements OnInit {
   private categoryId: string;
   public categoryName: string;
   public categoryRef: DocumentReference;
+  public editMode: boolean = false;
 
   imgs: IFGalleryItem[] = [];
 
@@ -45,5 +46,13 @@ export class ImagesComponent implements OnInit {
         category: this.categoryRef
       }
     });
+  }
+
+  removeImage(img: IFGalleryItem): void {
+    this.images.remove(img);
+  }
+
+  editTitle(img: IFGalleryItem, title: string): void {
+    this.images.rename(img, title);
   }
 }

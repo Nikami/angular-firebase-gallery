@@ -4,7 +4,13 @@ import {
   MatIconModule,
   MatButtonModule,
   MatInputModule,
-  MatIconRegistry, MatCardModule, MatMenuModule, MatTooltipModule, MatTabsModule, MatDialogModule
+  MatIconRegistry,
+  MatCardModule,
+  MatMenuModule,
+  MatTooltipModule,
+  MatTabsModule,
+  MatDialogModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -17,7 +23,8 @@ const COMPONENT_MODULES = [
   MatMenuModule,
   MatTooltipModule,
   MatTabsModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({

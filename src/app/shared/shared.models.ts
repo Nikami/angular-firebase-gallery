@@ -11,6 +11,7 @@ export interface IFGalleryCategory {
 }
 
 export interface IFGalleryItem {
+  id: string;
   uid: string;
   category: DocumentReference;
   title: string;

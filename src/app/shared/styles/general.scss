@@ -24,6 +24,15 @@ body {
   visibility: hidden;
 }
 
+.mono-font {
+  font-family: Roboto Mono;
+  font-weight: normal;
+}
+
+.primary-text {
+  color: $primary-color;
+}
+
 .accent-text2 {
   color: $accent-color1;
 }

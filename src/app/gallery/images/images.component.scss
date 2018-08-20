@@ -1,7 +1,20 @@
-//.img-container {
-//  max-height: 300px;
-//}
+:host {
+  width: 100%;
+}
 
 .gallery-img {
   max-height: 300px;
+}
+
+.card {
+  position: relative;
+}
+
+.remove-btn {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -0.8rem !important;
+  margin-right: -0.8rem;
 }

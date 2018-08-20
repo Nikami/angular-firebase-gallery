@@ -65,9 +65,6 @@ export class AuthService {
       const currentDate = new Date();
       const tokenExpDate = new Date(userToken.expirationTime);
 
-      console.log('currentDate =', currentDate);
-      console.log('tokenExpDate =', tokenExpDate);
-
       if (currentDate < tokenExpDate) {
         // TODO maybe remove this ot move to local storage
         this.cookie.put(COOKIE.TOKEN, userToken.token, { expires: userToken.expirationTime });

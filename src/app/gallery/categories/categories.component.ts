@@ -19,9 +19,6 @@ export class CategoriesComponent {
 
   constructor(private categories: CategoriesService) {
     this.categories$ = this.categories.get();
-    this.categories$.subscribe((categories) => {
-      console.log('categories =', categories);
-    });
   }
 
   makeQueryParams(category: IFGalleryCategory): IQueryParams {

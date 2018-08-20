@@ -12,12 +12,14 @@ import { UploadComponent } from './upload/upload.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ImagesComponent } from './images/images.component';
 import { ImagesService } from './services/images.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    GalleryRouting
+    GalleryRouting,
+    FormsModule
   ],
   declarations: [GalleryComponent, CategoriesComponent, NavigationComponent, ImagesComponent, UploadComponent],
   entryComponents: [UploadComponent],

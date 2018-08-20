@@ -6,20 +6,39 @@
 
 </h1>
 
+<div class="d-flex mb-5">
+  <mat-slide-toggle [(ngModel)]="editMode">
+    {{ 'EDIT_MODE' | translate }}
+  </mat-slide-toggle>
+</div>
+
 <div class="row images align-items-stretch">
 
   <div *ngFor="let img of imgs"
-       class="img-container d-flex col-md-4 col-12 mb-4">
+       class="d-flex col-md-4 col-12 mb-4">
 
-    <mat-card class="d-flex flex-column justify-content-between w-100">
+    <mat-card class="card d-flex flex-column justify-content-between w-100">
 
+      <button (click)="removeImage(img)"
+              [ngClass]="{'visible': editMode}"
+              mat-mini-fab=""
+              color="warn"
+              type="button"
+              class="remove-btn">
+        <mat-icon>clear</mat-icon>
+      </button>
 
       <a href="{{ img.url }}" target="_blank">
         <img src="{{ img.url }}" alt="{{ img.title }}" class="img-fluid gallery-img">
       </a>
 
       <mat-form-field class="mt-4">
-        <input matInput type="text" [value]="img.title" placeholder="Title">
+        <input (blur)="editTitle(img, $event.target.value)"
+               [value]="img.title"
+               [readonly]="!editMode"
+               matInput
+               type="text"
+               placeholder="Title">
       </mat-form-field>
 
     </mat-card>
@@ -29,11 +48,13 @@
 </div>
 
 <div class="container fixed-bottom d-flex justify-content-end">
+
   <button (click)="openUploadDialog()"
           matTooltip="{{ 'IMAGES.UPLOAD_IMG' | translate }}"
           type="button"
           mat-fab=""
           class="mb-5">
-    +
+    <mat-icon>add_photo_alternate</mat-icon>
   </button>
+
 </div>
