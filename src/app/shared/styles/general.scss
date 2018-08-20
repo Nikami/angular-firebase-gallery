@@ -1,16 +1,7 @@
 @import "variables";
 
 html {
-  box-sizing: border-box;
-  -ms-overflow-style: scrollbar;
   font-size: 10px;
-  height: 100%;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
 }
 
 body {
@@ -19,7 +10,6 @@ body {
   margin: 0;
   min-width: 320px;
   font-size: 1.4rem;
-  height: 100%;
 }
 
 .pointer {

@@ -11,10 +11,11 @@
   <div *ngFor="let img of imgs"
        class="img-container d-flex col-md-4 col-12 mb-4">
 
-    <mat-card class="d-flex flex-column h-100 justify-content-between">
+    <mat-card class="d-flex flex-column justify-content-between w-100">
+
 
       <a href="{{ img.url }}" target="_blank">
-        <img src="{{ img.url }}" alt="{{ img.title }}" class="img-fluid">
+        <img src="{{ img.url }}" alt="{{ img.title }}" class="img-fluid gallery-img">
       </a>
 
       <mat-form-field class="mt-4">

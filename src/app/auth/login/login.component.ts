@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AUTH_SUBJECT, AuthService } from '../services/auth.service';
 import { IUser } from '../../shared/shared.models';
@@ -9,8 +9,6 @@ import { IUser } from '../../shared/shared.models';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @HostBinding('class') classList: string = 'd-flex justify-content-center align-items-center w-100';
-
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
