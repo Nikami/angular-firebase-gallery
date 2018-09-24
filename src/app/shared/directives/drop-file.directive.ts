@@ -1,12 +1,12 @@
 import { Directive, HostListener, Output, EventEmitter } from '@angular/core';
 
 @Directive({
-  selector: '[afgDropZone]'
+  selector: '[afgDropFile]'
 })
-export class DropZoneDirective {
+export class DropFileDirective {
 
-  @Output() dropped =  new EventEmitter<FileList>();
-  @Output() hovered =  new EventEmitter<boolean>();
+  @Output() dropped = new EventEmitter<FileList>();
+  @Output() hovered = new EventEmitter<boolean>();
 
   constructor() { }
 

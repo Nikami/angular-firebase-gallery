@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from './material';
-import { DropZoneDirective } from './directives/drop-zone.directive';
+import { DropFileDirective } from './directives/drop-file.directive';
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { InputSelectionDirective } from './directives/input-selection.directive';
+import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 
-
-const COMPONENTS = [DropZoneDirective, FileSizePipe, InputSelectionDirective];
-
+const COMPONENTS = [DropFileDirective, FileSizePipe, InputSelectionDirective, DragAndDropDirective];
 const services = [];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject } from '@angular/core';
+import { Component, HostBinding, Inject, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 import { UploadedFile } from './uploaded-file';
@@ -10,6 +10,7 @@ import { FIRE_STORAGE_PATH } from '../../app.config';
 
 export interface IUploadData {
   category: DocumentReference;
+  lastImgIdx: number;
 }
 
 @Component({
@@ -34,12 +35,13 @@ export class UploadComponent {
               private utils: UtilsService) {
   }
 
-  toggleHover(event: boolean) {
+  toggleHover(event: boolean): void {
     this.isHovering = event;
   }
 
   startUpload(event: FileList): void {
-    const files = Array.from(event);
+    const files: File[] = Array.from(event);
+    let orderIdx: number = this.data.lastImgIdx;
 
     files.forEach((file: File) => {
       if (file.type.split('/')[0] !== 'image') {
@@ -49,6 +51,8 @@ export class UploadComponent {
 
       const uid = this.utils.generateUID();
       const path = FIRE_STORAGE_PATH + uid;
+
+      orderIdx++;
       this.task = this.storage.upload(path, file);
 
       const fileRef = this.storage.ref(path);
@@ -58,7 +62,8 @@ export class UploadComponent {
         file.name,
         this.data.category,
         file.size,
-        this.task.percentageChanges()
+        this.task.percentageChanges(),
+        orderIdx
       );
 
       this.uploadedFiles.push(uploadedFile);

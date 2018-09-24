@@ -1,4 +1,4 @@
-import { DropZoneDirective } from './drop-zone.directive';
+import { DropZoneDirective } from './drop-file.directive';
 
 describe('DropZoneDirective', () => {
   it('should create an instance', () => {

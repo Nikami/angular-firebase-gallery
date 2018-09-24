@@ -17,8 +17,9 @@ export class ImagesService {
   getByCategoryRef(categoryRef: DocumentReference): Observable<IFGalleryItem[]> {
     return this.db.collection(
       DB.images,
-      (ref: CollectionReference) => ref.where('category', '==', categoryRef))
-      .snapshotChanges().pipe(
+      (ref: CollectionReference) => ref
+        .where('category', '==', categoryRef)
+        .orderBy('order')).snapshotChanges().pipe(
         map((actions: DocumentChangeAction<IFGalleryItem>[]) => {
           return actions.map((a: DocumentChangeAction<IFGalleryItem>) => {
             const data: IFGalleryItem = a.payload.doc.data();
@@ -44,5 +45,13 @@ export class ImagesService {
     this.db.collection(DB.images).doc(doc.id).delete().then(() => {
       this.storage.ref(FIRE_STORAGE_PATH).child(doc.uid).delete();
     });
+  }
+
+  changeImgOrder(doc: IFGalleryItem, order: number): void {
+    this.db.collection(DB.images).doc(doc.id).update({order: order});
+  }
+
+  private ascOrder(a: IFGalleryItem, b: IFGalleryItem): number {
+    return a.order - b.order;
   }
 }

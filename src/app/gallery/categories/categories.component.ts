@@ -1,24 +1,21 @@
-import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { CategoriesService } from '../services/categories.service';
 import { IFGalleryCategory } from '../../shared/shared.models';
 import { Subscription } from 'rxjs/internal/Subscription';
 
-interface IQueryParams {
-  id: string;
-  name: string;
-}
-
 @Component({
   selector: 'afg-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  styleUrls: ['./categories.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesComponent implements OnInit, OnDestroy {
-  @HostBinding('class') classList: string = 'row flex-wrap w-100';
+  @HostBinding('class') classList: string = 'd-flex flex-column w-100';
   public ctgs: IFGalleryCategory[] = [];
   private categoriesSubscription: Subscription;
 
-  constructor(private categories: CategoriesService) {
+  constructor(private categories: CategoriesService,
+              private cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -28,14 +25,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   subscibeToCategories(): void {
     this.categoriesSubscription = this.categories.get().subscribe((categories: IFGalleryCategory[]) => {
       this.ctgs = categories;
+      this.cdRef.detectChanges();
     });
-  }
-
-  makeQueryParams(category: IFGalleryCategory): IQueryParams {
-    return {
-      id: category.id,
-      name: category.name
-    };
   }
 
   ngOnDestroy(): void {

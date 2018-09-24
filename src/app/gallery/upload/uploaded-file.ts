@@ -10,12 +10,14 @@ export class UploadedFile {
   _url: string;
   _progess: Observable<number>;
   _isInProgress: boolean = true;
+  _orderIdx: number;
 
   constructor(fUid: string,
               fTitle: string,
               fCategory: DocumentReference,
               fSize: number,
-              fProgress: Observable<number>) {
+              fProgress: Observable<number>,
+              orderIdx: number) {
     this._uid = fUid;
     this._title = fTitle;
     this._category = fCategory;
@@ -26,6 +28,7 @@ export class UploadedFile {
         this._isInProgress = false;
       }
     });
+    this._orderIdx = orderIdx;
   }
 
   get title(): string {
@@ -57,7 +60,7 @@ export class UploadedFile {
       uid: this._uid,
       category: this._category,
       title: this._title,
-      order: null,
+      order: this._orderIdx,
       url: this._url
     };
   }

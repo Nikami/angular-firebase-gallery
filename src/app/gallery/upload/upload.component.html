@@ -1,16 +1,24 @@
-<h1 mat-dialog-title class="heading">
+<div class="d-flex justify-content-between">
 
-  <span class="grate mr-3">#</span>
+  <h1 class="heading">
+    <span class="grate mr-3">#</span>
+    {{ 'UPLOAD.UPLOAD_IMAGES' | translate }}
+  </h1>
 
-  {{ 'UPLOAD.UPLOAD_IMAGES' | translate }}
+  <div>
+    <button mat-icon-button (click)="closeDialog()" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 
-</h1>
+</div>
+
 
 <div mat-dialog-content>
 
   <div (hovered)="toggleHover($event)"
        (dropped)="startUpload($event)"
-       afgDropZone
+       afgDropFile
        [class.hovering]="isHovering"
        class="dropzone d-flex align-items-stretch">
 
@@ -31,6 +39,7 @@
                 (click)="uploadInput.click()"
                 color="primary"
                 type="button"
+                autofocus
                 class="col-auto d-flex align-items-center justify-content-center">
 
           <mat-icon>cloud_upload</mat-icon>
@@ -114,9 +123,4 @@
 
   </div>
 
-</div>
-
-<div mat-dialog-actions>
-  <button mat-button
-          (click)="closeDialog()">Close</button>
 </div>

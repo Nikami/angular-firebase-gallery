@@ -14,33 +14,41 @@
 
 <div class="row images align-items-stretch">
 
-  <div *ngFor="let img of imgs"
-       class="d-flex col-md-4 col-12 mb-4">
+  <div *ngFor="let img of imgs; let i = index"
+       [afgDnD]="{id: img.id, order: img.order}"
+       (dropped)="onImageDrop($event)"
+       [attr.draggable]="editMode"
+       class="img-block d-flex col-md-3 col-12 mb-4">
 
     <mat-card class="card d-flex flex-column justify-content-between w-100">
 
-      <button (click)="removeImage(img)"
-              [ngClass]="{'visible': editMode}"
-              mat-mini-fab=""
-              color="warn"
-              type="button"
-              class="remove-btn">
-        <mat-icon>clear</mat-icon>
-      </button>
+      <div class="h-100 d-flex flex-column align-items-center justify-content-center">
+        <button (click)="removeImage(img)"
+                [ngClass]="{'visible animation-pulse': editMode}"
+                mat-mini-fab=""
+                color="warn"
+                type="button"
+                class="remove-btn">
+          <mat-icon>clear</mat-icon>
+        </button>
 
-      <a href="{{ img.url }}" target="_blank">
-        <img src="{{ img.url }}" alt="{{ img.title }}" class="img-fluid gallery-img">
-      </a>
+        <div>
+          <img src="{{ img.url }}" alt="{{ img.title }}" draggable="false" class="img-fluid gallery-img">
+        </div>
+      </div>
 
-      <mat-form-field class="mt-4">
+      <mat-form-field class="mt-4 field-title">
         <input (blur)="editTitle(img, $event.target.value)"
                [value]="img.title"
-               [readonly]="!editMode"
+               [disabled]="!editMode"
                matInput
                type="text"
                placeholder="Title">
       </mat-form-field>
 
+      <div class="align-items-center justify-content-center mask">
+        <mat-icon>compare_arrows</mat-icon>
+      </div>
     </mat-card>
 
   </div>

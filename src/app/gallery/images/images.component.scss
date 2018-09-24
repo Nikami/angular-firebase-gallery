@@ -1,3 +1,6 @@
+@import "../../shared/styles/variables";
+@import "../../shared/styles/animations";
+
 :host {
   width: 100%;
 }
@@ -17,4 +20,48 @@
   right: 0;
   margin-top: -0.8rem !important;
   margin-right: -0.8rem;
+}
+
+.animation-pulse {
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+}
+
+.img-block {
+  &[draggable=true] {
+    cursor: grab;
+  }
+
+  &.hovered {
+    @extend .animation-jello;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+
+    .mask {
+      display: flex;
+    }
+
+    .remove-btn {
+      display: none;
+    }
+  }
+}
+
+.mask {
+  background-color: rgba($primary-color, 0.6);
+  border: 4px dotted $primary-color;
+  display: none;
+  color: $bg-color;
+  position: absolute;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  .mat-icon {
+    font-size: 12rem;
+    height: auto;
+    width: auto;
+  }
 }
