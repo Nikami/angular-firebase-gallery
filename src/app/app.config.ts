@@ -3,7 +3,7 @@ export enum LANG {
 }
 
 export enum COOKIE {
-  TOKEN = 'token'
+  TOKEN = 'afg-jwt'
 }
 
 export enum ROUTES {

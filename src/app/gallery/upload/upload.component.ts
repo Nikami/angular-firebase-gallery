@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Inject, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 import { UploadedFile } from './uploaded-file';
@@ -16,7 +16,8 @@ export interface IUploadData {
 @Component({
   selector: 'afg-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.scss']
+  styleUrls: ['./upload.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UploadComponent {
   @HostBinding('class') classList: string = 'w-100';
@@ -25,6 +26,7 @@ export class UploadComponent {
 
   uploadedFiles: Array<UploadedFile> = [];
   isHovering: boolean;
+  isUnsupportedFileType: boolean = false;
 
   constructor(private dialogRef: MatDialogRef<UploadComponent>,
               @Inject(MAT_DIALOG_DATA) public data: IUploadData,
@@ -32,7 +34,8 @@ export class UploadComponent {
               private route: ActivatedRoute,
               private db: AngularFirestore,
               private images: ImagesService,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private cdRef: ChangeDetectorRef) {
   }
 
   toggleHover(event: boolean): void {
@@ -45,9 +48,11 @@ export class UploadComponent {
 
     files.forEach((file: File) => {
       if (file.type.split('/')[0] !== 'image') {
-        console.error('unsupported file type :( ');
+        this.isUnsupportedFileType = true;
         return;
       }
+
+      this.isUnsupportedFileType = false;
 
       const uid = this.utils.generateUID();
       const path = FIRE_STORAGE_PATH + uid;
@@ -72,6 +77,7 @@ export class UploadComponent {
         fileRef.getDownloadURL().subscribe((url: string) => {
           uploadedFile.url = url;
           this.images.add(uploadedFile.getItem());
+          this.cdRef.detectChanges();
         });
       });
     });

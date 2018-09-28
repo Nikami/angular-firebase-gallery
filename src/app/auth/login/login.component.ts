@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AUTH_SUBJECT, AuthService } from '../services/auth.service';
 import { IUser } from '../../shared/shared.models';
@@ -6,9 +6,10 @@ import { IUser } from '../../shared/shared.models';
 @Component({
   selector: 'afg-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
@@ -39,9 +40,6 @@ export class LoginComponent implements OnInit {
       password: ''
     });
     this.pending = false;
-  }
-
-  ngOnInit() {
   }
 
   onSubmit({ value }: { value: IUser }): void {

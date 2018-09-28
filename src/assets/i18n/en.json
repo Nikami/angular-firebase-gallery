@@ -7,7 +7,8 @@
     "UPLOAD_IMAGES": "Upload",
     "DRAG_DROP": "Drag & Drop images anywhere here",
     "OPEN_IMAGE_NEW_TAB": "See full size",
-    "LINK_LABEL": "Link URL:"
+    "LINK_LABEL": "Link URL:",
+    "UNSUPPORTED": "Unsupported file type :("
   },
   "IMAGES": {
     "UPLOAD_IMG": "Upload image",

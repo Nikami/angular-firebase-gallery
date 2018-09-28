@@ -1,43 +1,48 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { IUser } from '../../shared/shared.models';
-import { User } from 'firebase';
-import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
 import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
 import { COOKIE, ROUTES } from '../../app.config';
+import { Subject } from 'rxjs/internal/Subject';
+import UserCredential = firebase.auth.UserCredential;
+import IdTokenResult = firebase.auth.IdTokenResult;
 
 export enum AUTH_SUBJECT {
   ERROR = 'error'
 }
 
 interface IAuthState {
-  user: ReplaySubject<User | null>,
-  error: ReplaySubject<string | null>
+  error: Subject<string | null>
 }
 
 @Injectable()
 export class AuthService {
   private state: IAuthState = {
-    user: new ReplaySubject(1),
-    error: new ReplaySubject(1)
+    error: new Subject()
   };
 
   constructor(private firebaseAuth: AngularFireAuth,
               private cookie: CookieService,
               private router: Router) {
-    this.subscribeToFbaseAuthState();
   }
 
-  public login(credentials: IUser): void {
+  async login(credentials: IUser): Promise<boolean | void> {
     this.cookie.remove(COOKIE.TOKEN);
-    this.firebaseAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)
-      .catch((err: Error) => {
-        this.set(AUTH_SUBJECT.ERROR, err.message);
-      });
+    try {
+      const uCreds: UserCredential = await this.firebaseAuth.auth.signInWithEmailAndPassword(
+        credentials.email,
+        credentials.password
+      );
+      const uToken: IdTokenResult = await uCreds.user.getIdTokenResult(false);
+      this.cookie.put(COOKIE.TOKEN, uToken.token, { expires: uToken.expirationTime });
+      this.router.navigateByUrl(ROUTES.DEFAULT);
+    } catch(err) {
+      this.set(AUTH_SUBJECT.ERROR, err.message);
+    }
   }
 
-  public logout() {
+  public logout(): void {
     this.firebaseAuth.auth.signOut()
       .then(() => {
         this.cookie.remove(COOKIE.TOKEN);
@@ -45,36 +50,11 @@ export class AuthService {
       });
   }
 
-  public get(key: keyof IAuthState): ReplaySubject<any> {
+  public get(key: keyof IAuthState): Subject<any> {
     return this.state[key];
   }
 
   private set(key: keyof IAuthState, value: any): void {
     (<any>this.state[key]).next(value);
-  }
-
-  private subscribeToFbaseAuthState(): void {
-    this.firebaseAuth.authState.subscribe(async (user: User) => {
-      if (!user) {
-        this.cookie.remove(COOKIE.TOKEN);
-        return;
-      }
-
-      const userToken = await user.getIdTokenResult();
-      const currentDate = new Date();
-      const tokenExpDate = new Date(userToken.expirationTime);
-
-      if (currentDate < tokenExpDate) {
-        // TODO maybe remove this ot move to local storage
-        this.cookie.put(COOKIE.TOKEN, userToken.token, { expires: userToken.expirationTime });
-
-        if (this.router.url === '/' + ROUTES.AUTH) {
-          this.router.navigateByUrl(ROUTES.DEFAULT);
-        }
-
-      } else {
-        this.logout();
-      }
-    });
   }
 }

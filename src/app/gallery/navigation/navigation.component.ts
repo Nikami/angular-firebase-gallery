@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { AuthService } from '../../auth/services/auth.service';
 import { ROUTES } from '../../app.config';
 
@@ -10,7 +10,8 @@ interface IRoute {
 @Component({
   selector: 'afg-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrls: ['./navigation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent {
   @HostBinding('class') classList: string = 'd-flex flex-column navbar fixed-top';
@@ -20,10 +21,6 @@ export class NavigationComponent {
       title: 'Gallery',
       path: ROUTES.CATEGORIES
     }
-    //{
-    //  title: 'Upload',
-    //  path: ROUTES.UPLOAD
-    //}
   ];
 
   constructor(private auth: AuthService) {

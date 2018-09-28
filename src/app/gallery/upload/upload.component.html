@@ -16,6 +16,12 @@
 
 <div mat-dialog-content>
 
+  <div *ngIf="isUnsupportedFileType" class="alert alert-danger d-flex justify-content-center align-items-center"
+       role="alert">
+    <mat-icon class="mr-2">error</mat-icon>
+    {{ 'UPLOAD.UNSUPPORTED' | translate }}
+  </div>
+
   <div (hovered)="toggleHover($event)"
        (dropped)="startUpload($event)"
        afgDropFile

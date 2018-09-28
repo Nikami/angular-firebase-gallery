@@ -3,6 +3,7 @@
 @import "~bootstrap/scss/variables";
 
 // Mixins
+@import "~bootstrap/scss/mixins/alert";
 @import "~bootstrap/scss/mixins/background-variant";
 @import "~bootstrap/scss/mixins/breakpoints";
 @import "~bootstrap/scss/mixins/border-radius";
@@ -41,3 +42,4 @@
 @import "~bootstrap/scss/nav";
 @import "~bootstrap/scss/progress";
 @import "~bootstrap/scss/images";
+@import "~bootstrap/scss/alert";

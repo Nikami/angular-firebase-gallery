@@ -1,24 +1,40 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie';
 import { COOKIE, ROUTES } from '../../app.config';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { User } from 'firebase';
+import { Observable } from 'rxjs/internal/Observable';
+import { CookieService } from 'ngx-cookie';
+import { fromPromise } from 'rxjs/internal-compatibility';
+import { AuthService } from '../../auth/services/auth.service';
+
 
 @Injectable()
 export class GalleryGuard implements CanActivate, CanActivateChild {
-  constructor(private cookie: CookieService,
+  constructor(private firebaseAuth: AngularFireAuth,
+              private cookie: CookieService,
+              private auth: AuthService,
               private router: Router) {
   }
 
-  canActivate(): boolean {
-    if (!!(this.cookie.get(COOKIE.TOKEN))) {
-      return true;
-    } else {
-      this.router.navigateByUrl(ROUTES.AUTH);
-      return false;
-    }
+  canActivate(): Observable<boolean> {
+    return this.firebaseAuth.authState.pipe(
+      switchMap((user: User) => {
+        const promise: Promise<string> = user ? user.getIdToken(false) : Promise.resolve('');
+        return fromPromise(promise);
+      }),
+      map((token: string) => token === this.cookie.get(COOKIE.TOKEN)),
+      tap((canActivate: boolean) => {
+        if (!canActivate) {
+          this.router.navigateByUrl(ROUTES.AUTH);
+          this.auth.logout();
+        }
+      })
+    );
   }
 
-  canActivateChild(): boolean {
+  canActivateChild(): Observable<boolean> {
     return this.canActivate();
   }
 }
