@@ -12,11 +12,12 @@
   </mat-slide-toggle>
 </div>
 
-<div class="row images align-items-stretch">
+<div [ngClass]="{'dragging': isDragging}" class="row images align-items-stretch">
 
   <div *ngFor="let img of imgs; let i = index"
        [afgDnD]="{id: img.id, order: img.order}"
        (dropped)="onImageDrop($event)"
+       (dragging)="onImageDragging($event)"
        [attr.draggable]="editMode"
        class="img-block d-flex col-md-3 col-12 mb-4">
 
@@ -24,7 +25,7 @@
 
       <div class="h-100 d-flex flex-column align-items-center justify-content-center">
         <button (click)="removeImage(img)"
-                [ngClass]="{'visible animation-pulse': editMode}"
+                [ngClass]="{'visible animation-pulse': editMode && !isDragging}"
                 mat-mini-fab=""
                 color="warn"
                 type="button"

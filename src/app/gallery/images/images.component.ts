@@ -24,6 +24,7 @@ export class ImagesComponent implements OnInit, OnDestroy {
   public categoryRef: DocumentReference;
   public editMode: boolean = false;
   public imgs: IFGalleryItem[] = [];
+  public isDragging: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private categories: CategoriesService,
@@ -42,14 +43,16 @@ export class ImagesComponent implements OnInit, OnDestroy {
   subscribeToImages(): void {
     this.imagesSubscription = this.images.getByCategoryRef(this.categoryRef).subscribe((images: IFGalleryItem[]) => {
       this.imgs = images;
-      this.lastImgIdx = Math.max.apply(Math, this.imgs.map(img => img.order));
+      this.lastImgIdx = images.length > 0 ? Math.max.apply(Math, this.imgs.map(img => img.order)) : 0;
       this.cdRef.detectChanges();
     });
   }
 
   openUploadDialog(): void {
+    this.dialog.closeAll();
     this.dialog.open(UploadComponent, {
-      width: '80%',
+      maxWidth: 'auto',
+      panelClass: 'container',
       data: {
         category: this.categoryRef,
         lastImgIdx: this.lastImgIdx
@@ -74,5 +77,9 @@ export class ImagesComponent implements OnInit, OnDestroy {
     const target2: IFGalleryItem = this.imgs.find(img => img.id === data[1].id);
     this.images.changeImgOrder(target1, data[1].order);
     this.images.changeImgOrder(target2, data[0].order);
+  }
+
+  onImageDragging(isDragging: boolean): void {
+    this.isDragging = isDragging;
   }
 }

@@ -26,7 +26,8 @@ export class DragAndDropDirective {
     }
   }
 
-  @Output() dropped = new EventEmitter();
+  @Output() dropped: EventEmitter<IDragAndDropOptions[]> = new EventEmitter();
+  @Output() dragging: EventEmitter<boolean> = new EventEmitter();
 
   @HostBinding('class.hovered')
   private isHovered: boolean = false;
@@ -36,6 +37,7 @@ export class DragAndDropDirective {
     event.stopPropagation();
     event.dataTransfer.setData('text', JSON.stringify(this.options));
     this.isHovered = false;
+    this.dragging.next(true);
   }
 
   @HostListener('dragover', ['$event'])
@@ -62,4 +64,10 @@ export class DragAndDropDirective {
     this.dropped.next(images);
   }
 
+  @HostListener('dragend', ['$event'])
+  onDragEnd(event: DragEvent): void {
+    event.stopPropagation();
+    event.preventDefault();
+    this.dragging.next(false);
+  }
 }

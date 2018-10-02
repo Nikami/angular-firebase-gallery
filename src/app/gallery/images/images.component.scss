@@ -27,6 +27,12 @@
   animation-fill-mode: forwards;
 }
 
+.images.dragging {
+  .img-block mat-card {
+    pointer-events: none;
+  }
+}
+
 .img-block {
   &[draggable=true] {
     cursor: grab;
@@ -39,10 +45,6 @@
 
     .mask {
       display: flex;
-    }
-
-    .remove-btn {
-      display: none;
     }
   }
 }
