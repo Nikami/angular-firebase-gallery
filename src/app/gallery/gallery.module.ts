@@ -12,17 +12,26 @@ import { UploadComponent } from './upload/upload.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ImagesComponent } from './images/images.component';
 import { ImagesService } from './services/images.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     GalleryRouting,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [GalleryComponent, CategoriesComponent, NavigationComponent, ImagesComponent, UploadComponent],
-  entryComponents: [UploadComponent],
+  declarations: [
+    GalleryComponent,
+    CategoriesComponent,
+    NavigationComponent,
+    ImagesComponent,
+    UploadComponent,
+    AddCategoryComponent
+  ],
+  entryComponents: [UploadComponent, AddCategoryComponent],
   providers: [AuthService, GalleryGuard, GalleryService, CategoriesService, ImagesService]
 })
 export class GalleryModule { }

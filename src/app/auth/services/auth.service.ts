@@ -46,7 +46,7 @@ export class AuthService {
     this.firebaseAuth.auth.signOut()
       .then(() => {
         this.cookie.remove(COOKIE.TOKEN);
-        window.location.reload();
+        this.router.navigateByUrl(ROUTES.AUTH).then(() => location.reload());
       });
   }
 

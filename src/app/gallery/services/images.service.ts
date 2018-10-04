@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { DocumentChangeAction } from 'angularfire2/firestore/interfaces';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { FIRE_STORAGE_PATH } from '../../app.config';
+import { from } from 'rxjs/internal/observable/from';
+import { merge } from 'rxjs/internal/observable/merge';
 
 @Injectable()
 export class ImagesService {
@@ -41,17 +43,14 @@ export class ImagesService {
     this.db.collection(DB.images).doc(doc.id).update({title: title});
   }
 
-  remove(doc: IFGalleryItem): void {
-    this.db.collection(DB.images).doc(doc.id).delete().then(() => {
-      this.storage.ref(FIRE_STORAGE_PATH).child(doc.uid).delete();
-    });
+  remove(doc: IFGalleryItem): Observable<any> {
+    return merge(
+      from(this.db.collection(DB.images).doc(doc.id).delete()),
+      this.storage.ref(FIRE_STORAGE_PATH).child(doc.uid).delete()
+    );
   }
 
   changeImgOrder(doc: IFGalleryItem, order: number): void {
     this.db.collection(DB.images).doc(doc.id).update({order: order});
-  }
-
-  private ascOrder(a: IFGalleryItem, b: IFGalleryItem): number {
-    return a.order - b.order;
   }
 }

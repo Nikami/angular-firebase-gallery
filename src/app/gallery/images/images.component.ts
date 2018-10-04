@@ -52,7 +52,7 @@ export class ImagesComponent implements OnInit, OnDestroy {
     this.dialog.closeAll();
     this.dialog.open(UploadComponent, {
       maxWidth: 'auto',
-      panelClass: 'container',
+      panelClass: ['dialog-primary', 'container'],
       data: {
         category: this.categoryRef,
         lastImgIdx: this.lastImgIdx

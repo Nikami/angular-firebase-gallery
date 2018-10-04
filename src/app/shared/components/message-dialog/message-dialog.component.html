@@ -1,0 +1,32 @@
+<div mat-dialog-title class="d-flex align-items-center">
+
+  <div class="d-flex align-items-center text-uppercase">
+    <mat-icon class="mr-2">
+      warning
+    </mat-icon>
+    <span class="warning-text mono-font">
+      {{ 'DIALOG.WARNING' | translate }}
+    </span>
+  </div>
+
+</div>
+
+<div mat-dialog-content>
+  <div class="message-text text-center" [innerHTML]="data.message | translate:data.translateParams"></div>
+</div>
+
+<div mat-dialog-actions class="d-flex align-items-center justify-content-center">
+  <button mat-raised-button
+          [mat-dialog-close]="true"
+          color="primary"
+          type="button">
+    {{ 'OK' | translate }}
+  </button>
+  <button mat-raised-button
+          [mat-dialog-close]="false"
+          cdkFocusInitial
+          type="button">
+    {{ 'CANCEL' | translate }}
+  </button>
+</div>
+

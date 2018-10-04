@@ -1,15 +1,13 @@
-<div class="d-flex justify-content-between">
+<div mat-dialog-title class="d-flex align-items-center position-relative">
 
-  <h1 class="heading">
-    <span class="grate mr-3">#</span>
+  <div class="mono-font text-uppercase">
+    <span class="accent-text2">#</span>
     {{ 'UPLOAD.UPLOAD_IMAGES' | translate }}
-  </h1>
-
-  <div>
-    <button mat-icon-button (click)="closeDialog()" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
   </div>
+
+  <button mat-mini-fab (click)="closeDialog()" type="button" class="position-absolute dialog-close-btn">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
 
 </div>
 
@@ -45,7 +43,7 @@
                 (click)="uploadInput.click()"
                 color="primary"
                 type="button"
-                autofocus
+                cdkFocusInitial
                 class="col-auto d-flex align-items-center justify-content-center">
 
           <mat-icon>cloud_upload</mat-icon>

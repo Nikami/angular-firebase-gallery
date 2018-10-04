@@ -1,0 +1,47 @@
+@import "variables";
+
+mat-icon.close-icon {
+  font-size: 1.8rem;
+  line-height: 1.8rem !important;
+  height: 1.8rem;
+  width: 1.8rem;
+}
+
+.dialog-primary,
+.dialog-accent {
+  .mat-dialog-title {
+    color: $white-color;
+  }
+
+  .mat-dialog-title,
+  .mat-dialog-content,
+  .mat-dialog-actions {
+    padding: 16px 24px;
+    margin: 0;
+  }
+
+  .mat-dialog-container {
+    padding: 0;
+    overflow: inherit;
+  }
+
+  .dialog-close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: -10px;
+    margin-right: -18px;
+  }
+}
+
+.dialog-primary {
+  .mat-dialog-title {
+    background-color: $primary-color;
+  }
+}
+
+.dialog-accent {
+  .mat-dialog-title {
+    background-color: $accent-color1;
+  }
+}

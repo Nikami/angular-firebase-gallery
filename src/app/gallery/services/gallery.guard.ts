@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, Router } from '@angular/router';
-import { COOKIE, ROUTES } from '../../app.config';
+import { CanActivate, CanActivateChild } from '@angular/router';
+import { COOKIE } from '../../app.config';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from 'firebase';
@@ -14,8 +14,7 @@ import { AuthService } from '../../auth/services/auth.service';
 export class GalleryGuard implements CanActivate, CanActivateChild {
   constructor(private firebaseAuth: AngularFireAuth,
               private cookie: CookieService,
-              private auth: AuthService,
-              private router: Router) {
+              private auth: AuthService) {
   }
 
   canActivate(): Observable<boolean> {
@@ -27,7 +26,6 @@ export class GalleryGuard implements CanActivate, CanActivateChild {
       map((token: string) => token === this.cookie.get(COOKIE.TOKEN)),
       tap((canActivate: boolean) => {
         if (!canActivate) {
-          this.router.navigateByUrl(ROUTES.AUTH);
           this.auth.logout();
         }
       })

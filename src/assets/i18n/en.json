@@ -3,6 +3,14 @@
     "TITLE": "Fragments",
     "SUB_TITLE": "Gallery"
   },
+  "CATEGORIES": {
+    "ADD_NEW_CATEGORY": "Add new category"
+  },
+  "ADD_CATEGORY": {
+    "TITLE": "Add new category",
+    "PLACEHOLDER": "Category name",
+    "ADD": "Add"
+  },
   "UPLOAD": {
     "UPLOAD_IMAGES": "Upload",
     "DRAG_DROP": "Drag & Drop images anywhere here",
@@ -16,5 +24,11 @@
   },
   "EDIT_MODE": "Edit mode",
   "LOGOUT": "Logout",
-  "CLOSE": "Close"
+  "CLOSE": "Close",
+  "CANCEL": "Cancel",
+  "OK": "Ok",
+  "DIALOG": {
+    "REMOVE_CATEGORY": "Are you sure you want to delete <strong>{{name}}</strong>? All images associated with it will be deleted as well.",
+    "WARNING": "Warning"
+  }
 }

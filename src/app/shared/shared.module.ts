@@ -6,14 +6,22 @@ import { DropFileDirective } from './directives/drop-file.directive';
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { InputSelectionDirective } from './directives/input-selection.directive';
 import { DragAndDropDirective } from './directives/drag-and-drop.directive';
+import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 
-const COMPONENTS = [DropFileDirective, FileSizePipe, InputSelectionDirective, DragAndDropDirective];
+const COMPONENTS = [
+  DropFileDirective,
+  FileSizePipe,
+  InputSelectionDirective,
+  DragAndDropDirective,
+  MessageDialogComponent
+];
 const services = [];
 
 @NgModule({
   imports: [CommonModule, MaterialModule, TranslateModule],
   declarations: [...COMPONENTS],
   exports: [MaterialModule, TranslateModule, ...COMPONENTS],
-  providers: [...services]
+  providers: [...services],
+  entryComponents: [MessageDialogComponent]
 })
 export class SharedModule {}

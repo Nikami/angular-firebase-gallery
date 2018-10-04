@@ -6,9 +6,27 @@
 
 </h1>
 
+<div class="d-flex mb-5">
+
+  <mat-slide-toggle [(ngModel)]="editMode">
+    {{ 'EDIT_MODE' | translate }}
+  </mat-slide-toggle>
+
+</div>
+
 <div class="row flex-wrap w-100">
+
   <div *ngFor="let category of ctgs"
-       class="col-md-4 col-12 mb-4">
+       class="card col-md-4 col-12 mb-4">
+
+    <button (click)="openRemoveDialog(category)"
+            [ngClass]="{'visible animation-pulse': editMode}"
+            mat-mini-fab=""
+            color="warn"
+            type="button"
+            class="remove-btn">
+      <mat-icon>clear</mat-icon>
+    </button>
 
     <mat-card [routerLink]="['/gallery/images']"
               [queryParams]="{id: category.id, name: category.name}"
@@ -24,4 +42,17 @@
     </mat-card>
 
   </div>
+
+</div>
+
+<div class="container fixed-bottom d-flex justify-content-end">
+
+  <button (click)="openAddCategoryDialog()"
+          matTooltip="{{ 'CATEGORIES.ADD_NEW_CATEGORY' | translate }}"
+          type="button"
+          mat-fab=""
+          class="mb-5">
+    <mat-icon>add_to_photos</mat-icon>
+  </button>
+
 </div>

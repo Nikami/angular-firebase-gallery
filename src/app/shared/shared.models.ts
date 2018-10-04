@@ -6,7 +6,7 @@ export interface IUser {
 }
 
 export interface IFGalleryCategory {
-  id: string;
+  id?: string;
   name: string;
 }
 
