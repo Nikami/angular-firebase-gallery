@@ -36,6 +36,10 @@
 .img-block {
   &[draggable=true] {
     cursor: grab;
+
+    .pointer {
+      cursor: inherit;
+    }
   }
 
   &.hovered {

@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../services/images.service';
 import { IFGalleryItem } from '../../shared/shared.models';
@@ -8,6 +17,7 @@ import { MatDialog } from '@angular/material';
 import { UploadComponent } from '../upload/upload.component';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDragAndDropOptions } from '../../shared/directives/drag-and-drop.directive';
+import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 
 @Component({
   selector: 'afg-images',
@@ -16,6 +26,8 @@ import { IDragAndDropOptions } from '../../shared/directives/drag-and-drop.direc
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImagesComponent implements OnInit, OnDestroy {
+  @ViewChild('imagesContainer') imagesContainer: ElementRef;
+
   private imagesSubscription: Subscription;
   private categoryId: string;
   private lastImgIdx: number;
@@ -30,7 +42,8 @@ export class ImagesComponent implements OnInit, OnDestroy {
               private categories: CategoriesService,
               private images: ImagesService,
               private dialog: MatDialog,
-              private cdRef: ChangeDetectorRef) { }
+              private cdRef: ChangeDetectorRef,
+              private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.categoryId = this.route.snapshot.queryParamMap.get('id');
@@ -81,5 +94,25 @@ export class ImagesComponent implements OnInit, OnDestroy {
 
   onImageDragging(isDragging: boolean): void {
     this.isDragging = isDragging;
+
+    if (isDragging) {
+      this.renderer.addClass(this.imagesContainer.nativeElement, 'dragging');
+    } else {
+      this.renderer.removeClass(this.imagesContainer.nativeElement, 'dragging');
+    }
+  }
+
+  openImageDialog(img: IFGalleryItem): void {
+    if (!this.editMode) {
+      this.dialog.closeAll();
+      this.dialog.open(ImageDialogComponent, {
+        maxWidth: 'auto',
+        panelClass: ['dialog-primary', 'container'],
+        data: {
+          title: img.title,
+          url: img.url
+        }
+      });
+    }
   }
 }

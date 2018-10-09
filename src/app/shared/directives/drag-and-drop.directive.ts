@@ -66,8 +66,6 @@ export class DragAndDropDirective {
 
   @HostListener('dragend', ['$event'])
   onDragEnd(event: DragEvent): void {
-    event.stopPropagation();
-    event.preventDefault();
     this.dragging.next(false);
   }
 }

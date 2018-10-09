@@ -15,4 +15,4 @@ export enum ROUTES {
   IMAGES = 'images'
 }
 
-export const FIRE_STORAGE_PATH = 'me/smiles/';
+export const FIRE_STORAGE_PATH = 'gallery/';

@@ -14,6 +14,7 @@ import { ImagesComponent } from './images/images.component';
 import { ImagesService } from './services/images.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 
 @NgModule({
   imports: [
@@ -29,9 +30,10 @@ import { AddCategoryComponent } from './add-category/add-category.component';
     NavigationComponent,
     ImagesComponent,
     UploadComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    ImageDialogComponent
   ],
-  entryComponents: [UploadComponent, AddCategoryComponent],
+  entryComponents: [UploadComponent, AddCategoryComponent, ImageDialogComponent],
   providers: [AuthService, GalleryGuard, GalleryService, CategoriesService, ImagesService]
 })
 export class GalleryModule { }

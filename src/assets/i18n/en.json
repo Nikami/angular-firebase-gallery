@@ -29,6 +29,7 @@
   "OK": "Ok",
   "DIALOG": {
     "REMOVE_CATEGORY": "Are you sure you want to delete <strong>{{name}}</strong>? All images associated with it will be deleted as well.",
-    "WARNING": "Warning"
+    "WARNING": "Warning",
+    "OPEN_FULL_SIZE": "Open full size"
   }
 }

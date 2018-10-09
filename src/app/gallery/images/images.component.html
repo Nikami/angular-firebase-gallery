@@ -2,7 +2,7 @@
 
 <span class="grate mr-3">#</span>
 
-  <a [routerLink]="['/gallery/categories']" class="primary-text">
+  <a [routerLink]="['/gallery/categories']">
     {{ 'IMAGES.GALLERY' | translate }}
   </a>
   //{{ categoryName }}
@@ -15,7 +15,7 @@
   </mat-slide-toggle>
 </div>
 
-<div [ngClass]="{'dragging': isDragging}" class="row images align-items-stretch">
+<div #imagesContainer class="row images align-items-stretch">
 
   <div *ngFor="let img of imgs; let i = index"
        [afgDnD]="{id: img.id, order: img.order}"
@@ -36,8 +36,11 @@
           <mat-icon>clear</mat-icon>
         </button>
 
-        <div>
-          <img src="{{ img.url }}" alt="{{ img.title }}" draggable="false" class="img-fluid gallery-img">
+        <div (click)="openImageDialog(img)">
+          <img src="{{ img.url }}"
+               alt="{{ img.title }}"
+               draggable="false"
+               class="img-fluid gallery-img pointer">
         </div>
       </div>
 
