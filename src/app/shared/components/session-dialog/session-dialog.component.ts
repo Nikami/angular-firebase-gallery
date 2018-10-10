@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { interval } from 'rxjs/internal/observable/interval';
 import { map, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -19,7 +19,8 @@ export class SessionDialogComponent implements OnInit, OnDestroy {
   public time$: Subject<number> = new Subject();
   private timerSubscription: Subscription;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: ISessionDialogData) {
+  constructor(@Inject(MAT_DIALOG_DATA) private data: ISessionDialogData,
+              private dialogRef: MatDialogRef<SessionDialogComponent>) {
   }
 
   ngOnInit(): void {
@@ -34,6 +35,10 @@ export class SessionDialogComponent implements OnInit, OnDestroy {
       )
       .subscribe((ms: number) => {
         this.time$.next(ms);
+
+        if (ms === 0) {
+          this.dialogRef.close(false);
+        }
       })
   }
 
