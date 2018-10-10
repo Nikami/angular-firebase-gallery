@@ -7,21 +7,25 @@ import { FileSizePipe } from './pipes/file-size.pipe';
 import { InputSelectionDirective } from './directives/input-selection.directive';
 import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
+import { SessionDialogComponent } from './components/session-dialog/session-dialog.component';
+import { MsToTimePipe } from './pipes/ms-to-time.pipe';
 
 const COMPONENTS = [
   DropFileDirective,
   FileSizePipe,
+  MsToTimePipe,
   InputSelectionDirective,
   DragAndDropDirective,
-  MessageDialogComponent
+  MessageDialogComponent,
+  SessionDialogComponent
 ];
-const services = [];
+const SERVICES = [];
 
 @NgModule({
   imports: [CommonModule, MaterialModule, TranslateModule],
   declarations: [...COMPONENTS],
   exports: [MaterialModule, TranslateModule, ...COMPONENTS],
-  providers: [...services],
-  entryComponents: [MessageDialogComponent]
+  providers: [...SERVICES],
+  entryComponents: [MessageDialogComponent, SessionDialogComponent]
 })
 export class SharedModule {}

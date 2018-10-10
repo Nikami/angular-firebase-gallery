@@ -1,15 +1,12 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { NotFoundInterceptor } from './http/notfound.interceptor';
-import { TimeoutInterceptor } from './http/timeout.interceptor';
-import { StorageService } from './http/storage.service';
 import { CookieModule, CookieService } from 'ngx-cookie';
-import { UtilsService } from './http/utils.service';
+import { UtilsService } from './services/utils.service';
+import { SessionExpirationService } from './services/session-expiration.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -29,19 +26,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   declarations: [],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TimeoutInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: NotFoundInterceptor,
-      multi: true
-    },
-    StorageService,
     CookieService,
-    UtilsService
+    UtilsService,
+    SessionExpirationService
   ]
 })
 export class CoreModule {

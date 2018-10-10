@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Inject } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 import { UploadedFile } from './uploaded-file';
 import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../services/images.service';
-import { UtilsService } from '../../core/http/utils.service';
+import { UtilsService } from '../../core/services/utils.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FIRE_STORAGE_PATH } from '../../app.config';
 

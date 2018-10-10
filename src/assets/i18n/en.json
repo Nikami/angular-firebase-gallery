@@ -30,6 +30,8 @@
   "DIALOG": {
     "REMOVE_CATEGORY": "Are you sure you want to delete <strong>{{name}}</strong>? All images associated with it will be deleted as well.",
     "WARNING": "Warning",
-    "OPEN_FULL_SIZE": "Open full size"
+    "OPEN_FULL_SIZE": "Open full size",
+    "SESSION_EXPIRES": "Your session will be expired soon. Do you want to prolong?",
+    "PROLONG": "Prolong"
   }
 }

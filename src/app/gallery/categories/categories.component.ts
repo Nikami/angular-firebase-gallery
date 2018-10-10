@@ -44,7 +44,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     this.dialog.closeAll();
     this.dialog.open(AddCategoryComponent, {
       maxWidth: '450px',
-      panelClass: 'dialog-primary',
+      panelClass: 'dialog-primary'
     });
   }
 

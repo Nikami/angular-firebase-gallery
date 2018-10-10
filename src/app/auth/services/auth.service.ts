@@ -9,17 +9,20 @@ import UserCredential = firebase.auth.UserCredential;
 import IdTokenResult = firebase.auth.IdTokenResult;
 
 export enum AUTH_SUBJECT {
-  ERROR = 'error'
+  ERROR = 'error',
+  SESSION = 'session'
 }
 
 interface IAuthState {
-  error: Subject<string | null>
+  error: Subject<string | null>;
+  session: Subject<string | null>
 }
 
 @Injectable()
 export class AuthService {
   private state: IAuthState = {
-    error: new Subject()
+    error: new Subject(),
+    session: new Subject()
   };
 
   constructor(private firebaseAuth: AngularFireAuth,
@@ -36,6 +39,9 @@ export class AuthService {
       );
       const uToken: IdTokenResult = await uCreds.user.getIdTokenResult(false);
       this.cookie.put(COOKIE.TOKEN, uToken.token, { expires: uToken.expirationTime });
+      this.cookie.put(COOKIE.SESSION, uToken.expirationTime, { expires: uToken.expirationTime });
+      this.set(AUTH_SUBJECT.SESSION, uToken.expirationTime);
+
       this.router.navigateByUrl(ROUTES.DEFAULT);
     } catch(err) {
       this.set(AUTH_SUBJECT.ERROR, err.message);
@@ -46,6 +52,7 @@ export class AuthService {
     this.firebaseAuth.auth.signOut()
       .then(() => {
         this.cookie.remove(COOKIE.TOKEN);
+        this.cookie.remove(COOKIE.SESSION);
         this.router.navigateByUrl(ROUTES.AUTH).then(() => location.reload());
       });
   }

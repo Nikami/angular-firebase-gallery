@@ -1,0 +1,39 @@
+<div mat-dialog-title class="d-flex align-items-center">
+
+  <div class="d-flex align-items-center text-uppercase">
+    <mat-icon class="mr-2">
+      warning
+    </mat-icon>
+    <span class="warning-text mono-font">
+      {{ 'DIALOG.WARNING' | translate }}
+    </span>
+  </div>
+
+</div>
+
+<div mat-dialog-content>
+
+  <div class="message-text text-center mb-3">
+    {{ 'DIALOG.SESSION_EXPIRES' | translate }}
+  </div>
+
+  <h2 class="text-center mono-font mb-0">
+    {{ this.time$ | async | msToTime }}
+  </h2>
+
+</div>
+
+<div mat-dialog-actions class="d-flex align-items-center justify-content-center">
+  <button mat-raised-button
+          [mat-dialog-close]="true"
+          color="primary"
+          cdkFocusInitial
+          type="button">
+    {{ 'DIALOG.PROLONG' | translate }}
+  </button>
+  <button mat-raised-button
+          [mat-dialog-close]="false"
+          type="button">
+    {{ 'LOGOUT' | translate }}
+  </button>
+</div>
