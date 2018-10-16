@@ -60,14 +60,16 @@
 
     <div *ngFor="let file of uploadedFiles; let idx = index" class="uploaded-image d-flex align-items-center w-100">
 
-      <div class="img-container mr-5">
+      <div class="img-container mr-5 position-relative">
 
         <a *ngIf="file.url"
            matTooltip="{{ 'UPLOAD.OPEN_IMAGE_NEW_TAB' | translate }}"
            href="{{ file.url }}"
            target="_blank">
 
-          <img src="{{ file.url }}" class="img-fluid">
+          <img src="{{ file.url }}"
+               [afgSpinner]="{isShown: true, onLoad: true}"
+               class="img-fluid">
 
         </a>
 

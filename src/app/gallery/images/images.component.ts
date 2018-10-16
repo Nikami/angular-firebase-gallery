@@ -62,6 +62,7 @@ export class ImagesComponent implements OnInit, OnDestroy {
   }
 
   openUploadDialog(): void {
+    this.editMode = false;
     this.dialog.closeAll();
     this.dialog.open(UploadComponent, {
       maxWidth: 'auto',

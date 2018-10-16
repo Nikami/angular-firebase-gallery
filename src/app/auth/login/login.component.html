@@ -11,11 +11,17 @@
           class="d-flex flex-column">
 
       <mat-form-field class="mb-3">
-        <input type="email" matInput placeholder="Email" formControlName="email">
+        <input matInput
+               formControlName="email"
+               type="email"
+               placeholder="{{ 'LOGIN.EMAIL' | translate }}">
       </mat-form-field>
 
       <mat-form-field class="mb-3">
-        <input type="password" matInput placeholder="Password" formControlName="password">
+        <input matInput
+               formControlName="password"
+               type="password"
+               placeholder="{{ 'LOGIN.PASSWORD' | translate }}">
         <mat-error *ngIf="errorMessage">
           {{ errorMessage }}
         </mat-error>
@@ -26,7 +32,7 @@
               mat-raised-button
               color="primary"
               class="mt-4">
-        Login
+        {{ 'LOGIN.LOGIN' | translate }}
       </button>
     </form>
 

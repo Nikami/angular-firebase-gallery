@@ -36,10 +36,11 @@
           <mat-icon>clear</mat-icon>
         </button>
 
-        <div (click)="openImageDialog(img)">
+        <div (click)="openImageDialog(img)" class="position-relative">
           <img src="{{ img.url }}"
                alt="{{ img.title }}"
                draggable="false"
+               [afgSpinner]="{isShown: true, onLoad: true}"
                class="img-fluid gallery-img pointer">
         </div>
       </div>

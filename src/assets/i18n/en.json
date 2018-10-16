@@ -1,7 +1,10 @@
 {
   "LOGIN": {
     "TITLE": "Fragments",
-    "SUB_TITLE": "Gallery"
+    "SUB_TITLE": "Gallery",
+    "LOGIN": "Login",
+    "EMAIL": "Email",
+    "PASSWORD": "Password"
   },
   "CATEGORIES": {
     "ADD_NEW_CATEGORY": "Add new category"

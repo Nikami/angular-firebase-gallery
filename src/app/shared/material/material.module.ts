@@ -36,13 +36,9 @@ export class MaterialModule {
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer
   ) {
-    iconRegistry.addSvgIcon(
-      'ctc-logo',
-      sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/ctc-logo.svg')
-    );
-    iconRegistry.addSvgIcon(
-      'arrow-right',
-      sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/arrow-right.svg')
-    );
+    //iconRegistry.addSvgIcon(
+    //  'afg-spinner',
+    //  sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/spinner.svg')
+    //);
   }
 }

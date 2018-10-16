@@ -9,6 +9,7 @@ import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { SessionDialogComponent } from './components/session-dialog/session-dialog.component';
 import { MsToTimePipe } from './pipes/ms-to-time.pipe';
+import { SpinnerDirective } from './directives/spinner.directive';
 
 const COMPONENTS = [
   DropFileDirective,
@@ -17,7 +18,8 @@ const COMPONENTS = [
   InputSelectionDirective,
   DragAndDropDirective,
   MessageDialogComponent,
-  SessionDialogComponent
+  SessionDialogComponent,
+  SpinnerDirective
 ];
 const SERVICES = [];
 
