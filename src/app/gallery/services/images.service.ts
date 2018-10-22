@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { DB, IFGalleryItem } from '../../shared/shared.models';
-import { AngularFirestore, CollectionReference, DocumentReference } from 'angularfire2/firestore';
+import { CollectionReference, DocumentReference } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { DocumentChangeAction } from 'angularfire2/firestore/interfaces';
-import { AngularFireStorage } from 'angularfire2/storage';
 import { FIRE_STORAGE_PATH } from '../../app.config';
 import { from } from 'rxjs/internal/observable/from';
 import { merge } from 'rxjs/internal/observable/merge';
+import { FirebaseApiService } from '../../core/services/firebase-api.service';
 
 @Injectable()
 export class ImagesService {
 
-  constructor(private db: AngularFirestore,
-              private storage: AngularFireStorage) {
+  constructor(private fapi: FirebaseApiService) {
   }
 
+  // TODO: mb should refactor this later
   getByCategoryRef(categoryRef: DocumentReference): Observable<IFGalleryItem[]> {
-    return this.db.collection(
+    return this.fapi.getCollection(
       DB.images,
       (ref: CollectionReference) => ref
         .where('category', '==', categoryRef)
@@ -32,25 +32,21 @@ export class ImagesService {
   }
 
   add(doc: IFGalleryItem): void {
-    try {
-      this.db.collection(DB.images).add(doc);
-    } catch {
-      console.error('trouble');
-    }
+    this.fapi.addToCollection(DB.images, doc);
   }
 
   rename(doc: IFGalleryItem, title): void {
-    this.db.collection(DB.images).doc(doc.id).update({title: title});
+    this.fapi.updateCollection(DB.images, doc, {title: title});
   }
 
   remove(doc: IFGalleryItem): Observable<any> {
     return merge(
-      from(this.db.collection(DB.images).doc(doc.id).delete()),
-      this.storage.ref(FIRE_STORAGE_PATH).child(doc.uid).delete()
+      from(this.fapi.removeFromCollection(DB.images, doc)),
+      this.fapi.removeFromStorage(FIRE_STORAGE_PATH, doc)
     );
   }
 
   changeImgOrder(doc: IFGalleryItem, order: number): void {
-    this.db.collection(DB.images).doc(doc.id).update({order: order});
+    this.fapi.updateCollection(DB.images, doc, {order: order});
   }
 }

@@ -23,6 +23,9 @@ export class SessionExpirationService {
               private dialog: MatDialog,
               private firebaseAuth: AngularFireAuth,
               private auth: AuthService) {
+  }
+
+  public init(): void {
     this.subscribeToSessionExpiration();
     this.subscribeToAuthSession();
     this.setSessionExpiration(this.cookie.get(COOKIE.SESSION));

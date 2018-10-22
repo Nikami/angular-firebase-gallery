@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Inject } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
-import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
+import { AngularFireUploadTask } from 'angularfire2/storage';
+import { DocumentReference } from 'angularfire2/firestore';
 import { UploadedFile } from './uploaded-file';
 import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../services/images.service';
 import { UtilsService } from '../../core/services/utils.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FIRE_STORAGE_PATH } from '../../app.config';
+import { FirebaseApiService } from '../../core/services/firebase-api.service';
 
 export interface IUploadData {
   category: DocumentReference;
@@ -30,9 +31,8 @@ export class UploadComponent {
 
   constructor(private dialogRef: MatDialogRef<UploadComponent>,
               @Inject(MAT_DIALOG_DATA) public data: IUploadData,
-              private storage: AngularFireStorage,
               private route: ActivatedRoute,
-              private db: AngularFirestore,
+              private fapi: FirebaseApiService,
               private images: ImagesService,
               private utils: UtilsService,
               private cdRef: ChangeDetectorRef) {
@@ -58,9 +58,9 @@ export class UploadComponent {
       const path = FIRE_STORAGE_PATH + uid;
 
       orderIdx++;
-      this.task = this.storage.upload(path, file);
+      this.task = this.fapi.uploadToStorage(path, file);
 
-      const fileRef = this.storage.ref(path);
+      const fileRef = this.fapi.getStorageRef(path);
       const uploadedFile: UploadedFile = new UploadedFile
       (
         uid,

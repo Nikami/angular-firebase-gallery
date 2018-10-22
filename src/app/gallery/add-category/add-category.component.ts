@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@a
 import { MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriesService } from '../services/categories.service';
+import { first } from 'rxjs/operators';
 
 interface IAddCategoryForm {
   name: string;
@@ -43,6 +44,8 @@ export class AddCategoryComponent {
 
   onSubmit({ value }: { value: IAddCategoryForm }): void {
     this.isDisabled = true;
-    this.categories.add(value).then(() => this.closeDialog());
+    this.categories.add(value).pipe(
+      first()
+    ).subscribe(() => this.closeDialog());
   }
 }

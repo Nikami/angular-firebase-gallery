@@ -16,17 +16,30 @@
 </div>
 
 <div mat-dialog-actions class="d-flex align-items-center justify-content-center">
-  <button mat-raised-button
+
+  <button *ngIf="actions.OK"
+          mat-raised-button
           [mat-dialog-close]="true"
           color="accent"
           type="button">
     {{ 'OK' | translate }}
   </button>
-  <button mat-raised-button
+
+  <button *ngIf="actions.CANCEL"
+          mat-raised-button
           [mat-dialog-close]="false"
           cdkFocusInitial
           type="button">
     {{ 'CANCEL' | translate }}
   </button>
+
+  <button *ngIf="actions.CLOSE"
+          mat-raised-button
+          [mat-dialog-close]="false"
+          color="accent"
+          type="button">
+    {{ 'CLOSE' | translate }}
+  </button>
+
 </div>
 

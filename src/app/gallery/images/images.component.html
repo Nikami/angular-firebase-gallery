@@ -1,11 +1,11 @@
 <h1 class="heading">
 
-<span class="grate mr-3">#</span>
-
-  <a [routerLink]="['/gallery/categories']">
-    {{ 'IMAGES.GALLERY' | translate }}
-  </a>
-  //{{ categoryName }}
+  <span [routerLink]="['/gallery/categories']"
+        matTooltip="{{ 'IMAGES.GALLERY' | translate }}"
+        class="d-flex align-items-center mono-font accent-text2 heading-logo heading-link">
+    <mat-icon>pages</mat-icon>
+    <mat-icon>chevron_left</mat-icon>
+  </span>{{ categoryName }}
 
 </h1>
 

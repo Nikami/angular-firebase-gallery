@@ -10,6 +10,7 @@ import { MessageDialogComponent } from './components/message-dialog/message-dial
 import { SessionDialogComponent } from './components/session-dialog/session-dialog.component';
 import { MsToTimePipe } from './pipes/ms-to-time.pipe';
 import { SpinnerDirective } from './directives/spinner.directive';
+import { BrowserModule } from '@angular/platform-browser';
 
 const COMPONENTS = [
   DropFileDirective,
@@ -21,13 +22,11 @@ const COMPONENTS = [
   SessionDialogComponent,
   SpinnerDirective
 ];
-const SERVICES = [];
 
 @NgModule({
   imports: [CommonModule, MaterialModule, TranslateModule],
   declarations: [...COMPONENTS],
-  exports: [MaterialModule, TranslateModule, ...COMPONENTS],
-  providers: [...SERVICES],
+  exports: [MaterialModule, BrowserModule, TranslateModule, ...COMPONENTS],
   entryComponents: [MessageDialogComponent, SessionDialogComponent]
 })
 export class SharedModule {}

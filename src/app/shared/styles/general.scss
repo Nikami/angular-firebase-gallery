@@ -1,5 +1,7 @@
 @import "variables";
 
+$heading-logo-size: 40px;
+
 html {
   font-size: 10px;
 }
@@ -56,9 +58,23 @@ a {
   text-transform: uppercase;
 }
 
-.grate {
-  font-size: 3.6rem;
-  color: $accent-color1;
+.heading-logo {
+  &.heading-link {
+    @extend .pointer;
+    color: $primary-color;
+    transition: color .2s ease-in;
+
+    &:hover {
+      color: $accent-color1;
+    }
+  }
+
+  mat-icon {
+    font-size: $heading-logo-size;
+    height: $heading-logo-size;
+    width: $heading-logo-size;
+    @extend .pointer;
+  }
 }
 
 [afgInputSelection], .selection {

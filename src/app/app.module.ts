@@ -9,15 +9,8 @@ import { SharedModule } from './shared';
 import { CoreModule } from './core';
 import { TranslateService } from '@ngx-translate/core';
 import { LANG } from './app.config';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { GalleryModule } from './gallery/gallery.module';
-import { AuthService } from './auth/services/auth.service';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,13 +19,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    SharedModule,
     CoreModule,
-    AngularFireModule.initializeApp(environment.firebase, 'angular-firebase-gallery'),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
+    SharedModule,
     AuthModule,
     GalleryModule
   ],

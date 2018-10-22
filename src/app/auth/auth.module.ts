@@ -8,11 +8,10 @@ import { AuthService } from './services/auth.service';
 
 @NgModule({
   imports: [
-    CommonModule,
-    SharedModule,
     AuthRouting,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [LoginComponent],
   providers: [AuthService]

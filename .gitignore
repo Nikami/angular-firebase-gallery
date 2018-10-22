@@ -13,7 +13,7 @@
 .project
 .classpath
 .c9/
-*.launch
+*.launchNaut
 .settings/
 *.sublime-workspace
 
@@ -38,3 +38,6 @@ testem.log
 .DS_Store
 Thumbs.db
 *.cache
+
+src/environments/environment.ts
+src/environments/environment.prod.ts

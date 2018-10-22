@@ -7,16 +7,19 @@ import { first, map } from 'rxjs/operators';
 import { DocumentChangeAction } from 'angularfire2/firestore/interfaces';
 import { ImagesService } from './images.service';
 import { combineLatest } from 'rxjs/internal/observable/combineLatest';
+import { FirebaseApiService } from '../../core/services/firebase-api.service';
 
 @Injectable()
 export class CategoriesService {
   private categories: AngularFirestoreCollection<IFGalleryCategory>;
 
   constructor(private db: AngularFirestore,
-              private images: ImagesService) {
-    this.categories = db.collection(DB.categories);
+              private images: ImagesService,
+              private fapi: FirebaseApiService) {
+    this.categories = this.fapi.getCollection(DB.categories);
   }
 
+  // TODO: mb should refactor this later
   get(): Observable<IFGalleryCategory[]> {
     return this.categories.snapshotChanges().pipe(
       map((actions: DocumentChangeAction<IFGalleryCategory>[]) => {
@@ -29,11 +32,8 @@ export class CategoriesService {
     );
   }
 
-  add(doc: IFGalleryCategory): Promise<void | DocumentReference> {
-    return this.db.collection(DB.categories).add(doc)
-      .catch(() => {
-        console.error('trouble');
-      });
+  add(doc: IFGalleryCategory): Observable<DocumentReference> {
+    return this.fapi.addToCollection(DB.categories, doc);
   }
 
   remove(doc: IFGalleryCategory): Observable<any> {
@@ -46,11 +46,11 @@ export class CategoriesService {
         images.map((image: IFGalleryItem) => imagesObs.push(this.images.remove(image)));
         return combineLatest(imagesObs);
       }),
-      map(() => this.db.collection(DB.categories).doc(doc.id).delete())
+      map(() => this.fapi.removeFromCollection(DB.categories, doc))
     );
   }
 
   getCategoryRefById(pushId: string): DocumentReference {
-    return this.categories.doc(pushId).ref;
+    return this.fapi.getDocRefByPushId(DB.categories, pushId);
   }
 }

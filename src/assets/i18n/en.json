@@ -35,6 +35,7 @@
     "WARNING": "Warning",
     "OPEN_FULL_SIZE": "Open full size",
     "SESSION_EXPIRES": "Your session will be expired soon. Do you want to prolong?",
-    "PROLONG": "Prolong"
+    "PROLONG": "Prolong",
+    "SYSTEM_OFFLINE": "<strong>System is currently offline.</strong><br/>Check your internet connection or contact system administrator."
   }
 }

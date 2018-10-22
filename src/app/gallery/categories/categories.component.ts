@@ -4,7 +4,10 @@ import { IFGalleryCategory } from '../../shared/shared.models';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddCategoryComponent } from '../add-category/add-category.component';
-import { MessageDialogComponent } from '../../shared/components/message-dialog/message-dialog.component';
+import {
+  MessageDialogActions,
+  MessageDialogComponent
+} from '../../shared/components/message-dialog/message-dialog.component';
 
 @Component({
   selector: 'afg-categories',
@@ -57,7 +60,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         message: 'DIALOG.REMOVE_CATEGORY',
         translateParams: {
           name: category.name
-        }
+        },
+        actions: [MessageDialogActions.OK, MessageDialogActions.CANCEL]
       }
     });
 

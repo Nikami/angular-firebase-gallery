@@ -18,11 +18,10 @@ import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    SharedModule,
     GalleryRouting,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     GalleryComponent,
