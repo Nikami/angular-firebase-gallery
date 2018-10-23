@@ -42,20 +42,21 @@ export class DragAndDropDirective {
 
   @HostListener('dragover', ['$event'])
   onDragOver(event: DragEvent): void {
-    event.stopPropagation();
     event.preventDefault();
+    event.stopPropagation();
     this.isHovered = true;
   }
 
   @HostListener('dragleave', ['$event'])
   onDragLeave(event: DragEvent): void {
-    event.stopPropagation();
     event.preventDefault();
+    event.stopPropagation();
     this.isHovered = false;
   }
 
   @HostListener('drop', ['$event'])
   onDrop(event: DragEvent): void {
+    event.preventDefault();
     event.stopPropagation();
     this.isHovered = false;
     const data: string = event.dataTransfer.getData('text');
