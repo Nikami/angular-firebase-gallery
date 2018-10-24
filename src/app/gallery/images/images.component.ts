@@ -13,7 +13,7 @@ import { ImagesService } from '../services/images.service';
 import { IFGalleryItem } from '../../shared/shared.models';
 import { DocumentReference } from 'angularfire2/firestore';
 import { CategoriesService } from '../services/categories.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { UploadComponent } from '../upload/upload.component';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDragAndDropOptions } from '../../shared/directives/drag-and-drop.directive';
@@ -106,12 +106,20 @@ export class ImagesComponent implements OnInit, OnDestroy {
   openImageDialog(img: IFGalleryItem): void {
     if (!this.editMode) {
       this.dialog.closeAll();
-      this.dialog.open(ImageDialogComponent, {
+
+      const dialogRef: MatDialogRef<ImageDialogComponent> = this.dialog.open(ImageDialogComponent, {
         maxWidth: 'auto',
         panelClass: ['dialog-primary', 'container'],
+        disableClose: true,
         data: {
           title: img.title,
           url: img.url
+        }
+      });
+
+      dialogRef.afterClosed().subscribe((title: string) => {
+        if (title && title !== img.title) {
+          this.editTitle(img, title);
         }
       });
     }

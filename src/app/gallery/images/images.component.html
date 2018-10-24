@@ -42,20 +42,16 @@
                [afgSpinner]="{isShown: true, onLoad: true}"
                class="img-fluid gallery-img pointer">
         </div>
-      </div>
 
-      <mat-form-field class="mt-4 field-title">
-        <input (blur)="editTitle(img, $event.target.value)"
-               [value]="img.title"
-               [disabled]="!editMode"
-               matInput
-               type="text"
-               placeholder="Title">
-      </mat-form-field>
+        <div class="mono-font text-break mt-2">
+          {{ img.title }}
+        </div>
+      </div>
 
       <div class="align-items-center justify-content-center mask">
         <mat-icon>compare_arrows</mat-icon>
       </div>
+
     </mat-card>
 
   </div>

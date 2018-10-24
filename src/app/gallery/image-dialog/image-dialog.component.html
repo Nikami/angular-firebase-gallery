@@ -1,15 +1,44 @@
 <div mat-dialog-title class="d-flex align-items-center position-relative">
 
-  <div class="mono-font text-uppercase">
-    <span class="accent-text2">#</span>
-    {{ data.title }}
+  <div class="mono-font text-uppercase position-relative d-flex align-items-center">
+
+    <button *ngIf="!editMode"
+            mat-mini-fab
+            (click)="enableForm()"
+            type="button" class="mr-3">
+      <mat-icon class="mini-icon">create</mat-icon>
+    </button>
+
+    <button *ngIf="editMode"
+            mat-mini-fab
+            (click)="onSubmit(form); disableForm()"
+            type="button" class="mr-3">
+      <mat-icon class="mini-icon">done</mat-icon>
+    </button>
+
+    <form #ngForm="ngForm"
+          [formGroup]="form"
+          (ngSubmit)="onSubmit(form); disableForm()">
+
+      <input #title
+             (blur)="onSubmit(form); disableForm()"
+             formControlName="title"
+             type="text"
+             class="text-uppercase modal-input">
+
+      <div class="modal-input-underline"></div>
+
+    </form>
+
   </div>
 
+
   <button mat-mini-fab
-          [mat-dialog-close]
+          (click)="close()"
           type="button"
+          color="accent"
           class="position-absolute dialog-close-btn">
-    <mat-icon class="close-icon">close</mat-icon>
+    <mat-icon class="mini-icon">close</mat-icon>
   </button>
 
 </div>

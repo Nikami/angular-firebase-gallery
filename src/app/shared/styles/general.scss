@@ -48,6 +48,10 @@ a {
   color: $accent-color1;
 }
 
+.text-break {
+  word-break: break-all;
+}
+
 .heading {
   align-items: center;
   display: flex;
