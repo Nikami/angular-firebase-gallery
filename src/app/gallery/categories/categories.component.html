@@ -19,7 +19,7 @@
 <div class="row flex-wrap w-100">
 
   <div *ngFor="let category of ctgs"
-       class="card col-md-4 col-12 mb-4">
+       class="position-relative col-md-4 col-12 mb-4">
 
     <button (click)="openRemoveDialog(category)"
             [ngClass]="{'visible animation-pulse': editMode}"

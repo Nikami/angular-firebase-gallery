@@ -5,14 +5,6 @@
   width: 100%;
 }
 
-.gallery-img {
-  max-height: 300px;
-}
-
-.card {
-  position: relative;
-}
-
 .remove-btn {
   visibility: hidden;
   position: absolute;
@@ -35,6 +27,8 @@
 }
 
 .img-block {
+  padding-top: 1rem;
+
   &[draggable=true] {
     cursor: grab;
 
@@ -71,4 +65,8 @@
     height: auto;
     width: auto;
   }
+}
+
+.image-title {
+  padding: 1rem;
 }
