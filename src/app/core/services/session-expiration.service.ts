@@ -48,6 +48,7 @@ export class SessionExpirationService {
       tap((uToken: IdTokenResult) => {
         this.cookie.put(COOKIE.TOKEN, uToken.token, { expires: uToken.expirationTime });
         this.cookie.put(COOKIE.SESSION, uToken.expirationTime, { expires: uToken.expirationTime });
+        this.setSessionExpiration(this.cookie.get(COOKIE.SESSION));
       })
     ).subscribe();
   }
