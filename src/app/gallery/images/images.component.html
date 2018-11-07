@@ -25,29 +25,33 @@
        class="d-inline-block img-block w-100">
 
       <div class="card d-flex flex-column align-items-center position-relative">
-        <button (click)="removeImage(img)"
-                [ngClass]="{'visible animation-pulse': editMode && !isDragging}"
-                mat-mini-fab=""
-                color="warn"
-                type="button"
-                class="remove-btn">
-          <mat-icon>clear</mat-icon>
-        </button>
 
-        <div (click)="openImageDialog(img)" class="position-relative">
+        <div (click)="openImageDialog(img)" class="position-relative text-center">
+
+          <button (click)="removeImage(img)"
+                  [ngClass]="{'visible animation-pulse': editMode && !isDragging}"
+                  mat-mini-fab=""
+                  color="warn"
+                  type="button"
+                  class="remove-btn">
+            <mat-icon>clear</mat-icon>
+          </button>
+
           <img src="{{ img.url }}"
                draggable="false"
                [afgSpinner]="{isShown: true, onLoad: true}"
                class="img-fluid gallery-img pointer">
-        </div>
 
-        <div class="mono-font text-break image-title">
-          {{ img.title }}
+          <div class="mono-font text-break image-title">
+            {{ img.title }}
+          </div>
+
         </div>
 
         <div class="align-items-center justify-content-center mask">
           <mat-icon>compare_arrows</mat-icon>
         </div>
+
       </div>
 
   </div>
