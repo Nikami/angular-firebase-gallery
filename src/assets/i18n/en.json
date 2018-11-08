@@ -14,6 +14,12 @@
     "PLACEHOLDER": "Category name",
     "ADD": "Add"
   },
+  "MOVE_IMAGE": {
+    "TITLE": "Move image to another category",
+    "CATEGORY": "Category",
+    "CATEGORY_IS_NOT_EXISTS": "Category with such name is not exists.",
+    "MOVE": "Move"
+  },
   "UPLOAD": {
     "UPLOAD_IMAGES": "Upload",
     "DRAG_DROP": "Drag & Drop images anywhere here",
@@ -23,7 +29,8 @@
   },
   "IMAGES": {
     "UPLOAD_IMG": "Upload image",
-    "GALLERY": "Gallery"
+    "GALLERY": "Gallery",
+    "MOVE_IMAGE": "Move image"
   },
   "EDIT_MODE": "Edit mode",
   "LOGOUT": "Logout",

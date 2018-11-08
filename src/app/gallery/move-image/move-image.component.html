@@ -1,0 +1,49 @@
+<div mat-dialog-title class="d-flex align-items-center position-relative">
+
+  <div class="mono-font text-uppercase">
+    <span class="accent-text2">#</span>
+    {{ 'MOVE_IMAGE.TITLE' | translate }}
+  </div>
+
+  <button mat-mini-fab (click)="closeDialog()" type="button" class="position-absolute dialog-close-btn">
+    <mat-icon class="mini-icon">close</mat-icon>
+  </button>
+
+</div>
+
+<div mat-dialog-content>
+
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit(form)"
+        class="d-flex flex-column">
+
+    <mat-form-field class="mb-3">
+      <input type="text"
+             matInput
+             formControlName="category"
+             autocomplete="off"
+             [matAutocomplete]="auto"
+             placeholder="{{ 'MOVE_IMAGE.CATEGORY' | translate }}">
+
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let category of filteredCategories | async" [value]="category.name">
+          {{ category.name }}
+        </mat-option>
+      </mat-autocomplete>
+
+      <mat-error *ngIf="errorMessage">
+        {{ errorMessage | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <button [disabled]="form.invalid || form.disabled"
+            cdkFocusInitial
+            type="submit"
+            mat-raised-button
+            color="primary"
+            class="mt-4">
+      {{ 'MOVE_IMAGE.MOVE' | translate  }}
+    </button>
+  </form>
+
+</div>

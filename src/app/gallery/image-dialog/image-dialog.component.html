@@ -1,6 +1,6 @@
 <div mat-dialog-title class="d-flex align-items-center position-relative">
 
-  <div class="mono-font text-uppercase position-relative d-flex align-items-center">
+  <div class="mono-font text-uppercase position-relative d-flex align-items-center w-100">
 
     <button *ngIf="!editMode"
             mat-mini-fab
@@ -18,13 +18,14 @@
 
     <form #ngForm="ngForm"
           [formGroup]="form"
-          (ngSubmit)="onSubmit(form); disableForm()">
+          (ngSubmit)="onSubmit(form); disableForm()"
+          class="w-100">
 
       <input #title
              (blur)="onSubmit(form); disableForm()"
              formControlName="title"
              type="text"
-             class="text-uppercase modal-input">
+             class="text-uppercase modal-input w-100">
 
       <div class="modal-input-underline"></div>
 
@@ -46,7 +47,7 @@
 <div mat-dialog-content>
 
   <div class="w-100 text-center">
-    <img src="{{ data.url }}" alt="{{ data.title }}" class="img-fluid dialog-image">
+    <img src="{{ data.img.url  }}" alt="{{ data.img.title }}" class="img-fluid dialog-image">
   </div>
 
 </div>
@@ -54,7 +55,7 @@
 <div mat-dialog-actions class="d-flex justify-content-center">
   <a mat-button
      color="primary"
-     href="{{ data.url }}"
+     href="{{ data.img.url }}"
      target="_blank" class="mono-font text-uppercase">
     {{ 'DIALOG.OPEN_FULL_SIZE' | translate }}
   </a>

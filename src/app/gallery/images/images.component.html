@@ -37,6 +37,15 @@
             <mat-icon>clear</mat-icon>
           </button>
 
+          <button (click)="moveImage(img)"
+                  [ngClass]="{'visible animation-pulse': editMode && !isDragging}"
+                  matTooltip="{{ 'IMAGES.MOVE_IMAGE' | translate }}"
+                  mat-mini-fab=""
+                  type="button"
+                  class="move-btn">
+            <mat-icon>subdirectory_arrow_left</mat-icon>
+          </button>
+
           <img src="{{ img.url }}"
                draggable="false"
                [afgSpinner]="{isShown: true, onLoad: true}"

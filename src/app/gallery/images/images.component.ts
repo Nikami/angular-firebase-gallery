@@ -13,11 +13,12 @@ import { ImagesService } from '../services/images.service';
 import { IFGalleryItem } from '../../shared/shared.models';
 import { DocumentReference } from 'angularfire2/firestore';
 import { CategoriesService } from '../services/categories.service';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { UploadComponent } from '../upload/upload.component';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDragAndDropOptions } from '../../shared/directives/drag-and-drop.directive';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
+import { MoveImageComponent } from '../move-image/move-image.component';
 
 @Component({
   selector: 'afg-images',
@@ -53,12 +54,8 @@ export class ImagesComponent implements OnInit, OnDestroy {
     this.subscribeToImages();
   }
 
-  subscribeToImages(): void {
-    this.imagesSubscription = this.images.getByCategoryRef(this.categoryRef).subscribe((images: IFGalleryItem[]) => {
-      this.imgs = images;
-      this.lastImgIdx = images.length > 0 ? Math.max.apply(Math, this.imgs.map(img => img.order)) : 0;
-      this.cdRef.detectChanges();
-    });
+  ngOnDestroy(): void {
+    this.imagesSubscription.unsubscribe();
   }
 
   openUploadDialog(): void {
@@ -78,12 +75,14 @@ export class ImagesComponent implements OnInit, OnDestroy {
     this.images.remove(img);
   }
 
-  editTitle(img: IFGalleryItem, title: string): void {
-    this.images.rename(img, title);
-  }
-
-  ngOnDestroy(): void {
-    this.imagesSubscription.unsubscribe();
+  moveImage(img: IFGalleryItem): void {
+    this.dialog.closeAll();
+    this.dialog.open(MoveImageComponent, {
+      maxWidth: 'auto',
+      panelClass: ['dialog-primary', 'container'],
+      disableClose: true,
+      data: { img, category: this.categoryName }
+    });
   }
 
   onImageDrop(data: IDragAndDropOptions[]): void {
@@ -106,22 +105,20 @@ export class ImagesComponent implements OnInit, OnDestroy {
   openImageDialog(img: IFGalleryItem): void {
     if (!this.editMode) {
       this.dialog.closeAll();
-
-      const dialogRef: MatDialogRef<ImageDialogComponent> = this.dialog.open(ImageDialogComponent, {
+      this.dialog.open(ImageDialogComponent, {
         maxWidth: 'auto',
         panelClass: ['dialog-primary', 'container'],
         disableClose: true,
-        data: {
-          title: img.title,
-          url: img.url
-        }
-      });
-
-      dialogRef.afterClosed().subscribe((title: string) => {
-        if (title && title !== img.title) {
-          this.editTitle(img, title);
-        }
+        data: { img }
       });
     }
+  }
+
+  private subscribeToImages(): void {
+    this.imagesSubscription = this.images.getByCategoryRef(this.categoryRef).subscribe((images: IFGalleryItem[]) => {
+      this.imgs = images;
+      this.lastImgIdx = images.length > 0 ? Math.max.apply(Math, this.imgs.map(img => img.order)) : 0;
+      this.cdRef.detectChanges();
+    });
   }
 }

@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ImagesService } from '../services/images.service';
+import { IFGalleryItem } from '../../shared/shared.models';
 
 export interface IImageDialogData {
-  title: string;
-  url: string;
+  img: IFGalleryItem;
 }
 
 interface IDialogForm {
@@ -27,7 +28,8 @@ export class ImageDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: IImageDialogData,
               private fb: FormBuilder,
-              private dialogRef: MatDialogRef<ImageDialogComponent>) {
+              private dialogRef: MatDialogRef<ImageDialogComponent>,
+              private images: ImagesService) {
   }
 
   ngOnInit(): void {
@@ -48,16 +50,23 @@ export class ImageDialogComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close(this.title);
+    this.dialogRef.close();
   }
 
   onSubmit({ value }: { value: IDialogForm }): void {
     this.title = value.title;
+    this.renameImg();
   }
 
   private createForm(): void {
     this.form = this.fb.group({
-      title: [this.data.title, Validators.required]
+      title: [this.data.img.title, Validators.required]
     });
+  }
+
+  private renameImg(): void {
+    if (this.title && this.title !== this.data.img.title) {
+      this.images.rename(this.data.img, this.title);
+    }
   }
 }

@@ -10,7 +10,8 @@ import {
   MatTooltipModule,
   MatTabsModule,
   MatDialogModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -24,7 +25,8 @@ const COMPONENT_MODULES = [
   MatTooltipModule,
   MatTabsModule,
   MatDialogModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatAutocompleteModule
 ];
 
 @NgModule({
