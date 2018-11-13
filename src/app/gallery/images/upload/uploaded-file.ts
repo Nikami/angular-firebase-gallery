@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/internal/Observable';
 import { IFGalleryItem } from '../../../shared/shared.models';
-import { DocumentReference } from 'angularfire2/firestore';
+import { DocumentReference } from '@angular/fire/firestore';
 
 export class UploadedFile {
   _uid: string;
@@ -12,12 +12,14 @@ export class UploadedFile {
   _isInProgress: boolean = true;
   _orderIdx: number;
 
-  constructor(fUid: string,
-              fTitle: string,
-              fCategory: DocumentReference,
-              fSize: number,
-              fProgress: Observable<number>,
-              orderIdx: number) {
+  constructor(
+    fUid: string,
+    fTitle: string,
+    fCategory: DocumentReference,
+    fSize: number,
+    fProgress: Observable<number>,
+    orderIdx: number
+  ) {
     this._uid = fUid;
     this._title = fTitle;
     this._category = fCategory;

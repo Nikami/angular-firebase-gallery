@@ -7,14 +7,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CookieModule, CookieService } from 'ngx-cookie';
 import { UtilsService } from './services/utils.service';
 import { FirebaseApiService } from './services/firebase-api.service';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../../environments/environment';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireStorageModule } from 'angularfire2/storage';
 import { SessionExpirationService } from './services/session-expiration.service';
 import { OfflineService } from './services/offline.service';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -23,7 +23,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   imports: [
     CommonModule,
-    AngularFireModule.initializeApp(environment.firebase, 'angular-firebase-gallery'),
+    AngularFireModule.initializeApp(
+      environment.firebase,
+      'angular-firebase-gallery'
+    ),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,

@@ -11,7 +11,6 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../services/images.service';
 import { IFGalleryItem } from '../../shared/shared.models';
-import { DocumentReference } from 'angularfire2/firestore';
 import { CategoriesService } from '../services/categories.service';
 import { MatDialog } from '@angular/material';
 import { UploadComponent } from './upload/upload.component';
@@ -19,6 +18,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IDragAndDropOptions } from '../../shared/directives/drag-and-drop.directive';
 import { ImageComponent } from './image/image.component';
 import { MoveImageComponent } from './move-image/move-image.component';
+import { DocumentReference } from '@angular/fire/firestore';
 
 @Component({
   selector: 'afg-images',
@@ -39,12 +39,14 @@ export class ImagesComponent implements OnInit, OnDestroy {
   public imgs: IFGalleryItem[] = [];
   public isDragging: boolean = false;
 
-  constructor(private route: ActivatedRoute,
-              private categories: CategoriesService,
-              private images: ImagesService,
-              private dialog: MatDialog,
-              private cdRef: ChangeDetectorRef,
-              private renderer: Renderer2) { }
+  constructor(
+    private route: ActivatedRoute,
+    private categories: CategoriesService,
+    private images: ImagesService,
+    private dialog: MatDialog,
+    private cdRef: ChangeDetectorRef,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit(): void {
     this.categoryId = this.route.snapshot.queryParamMap.get('id');
@@ -115,10 +117,15 @@ export class ImagesComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToImages(): void {
-    this.imagesSubscription = this.images.getByCategoryRef(this.categoryRef).subscribe((images: IFGalleryItem[]) => {
-      this.imgs = images;
-      this.lastImgIdx = images.length > 0 ? Math.max.apply(Math, this.imgs.map(img => img.order)) : 0;
-      this.cdRef.detectChanges();
-    });
+    this.imagesSubscription = this.images
+      .getByCategoryRef(this.categoryRef)
+      .subscribe((images: IFGalleryItem[]) => {
+        this.imgs = images;
+        this.lastImgIdx =
+          images.length > 0
+            ? Math.max.apply(Math, this.imgs.map(img => img.order))
+            : 0;
+        this.cdRef.detectChanges();
+      });
   }
 }

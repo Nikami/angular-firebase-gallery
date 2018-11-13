@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { IUser } from '../../shared/shared.models';
 import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export enum AUTH_SUBJECT {
 
 interface IAuthState {
   error: Subject<string | null>;
-  session: Subject<string | null>
+  session: Subject<string | null>;
 }
 
 @Injectable()
@@ -25,10 +25,11 @@ export class AuthService {
     session: new Subject()
   };
 
-  constructor(private firebaseAuth: AngularFireAuth,
-              private cookie: CookieService,
-              private router: Router) {
-  }
+  constructor(
+    private firebaseAuth: AngularFireAuth,
+    private cookie: CookieService,
+    private router: Router
+  ) {}
 
   async login(credentials: IUser): Promise<boolean | void> {
     this.cookie.remove(COOKIE.TOKEN);
@@ -38,23 +39,26 @@ export class AuthService {
         credentials.password
       );
       const uToken: IdTokenResult = await uCreds.user.getIdTokenResult(false);
-      this.cookie.put(COOKIE.TOKEN, uToken.token, { expires: uToken.expirationTime });
-      this.cookie.put(COOKIE.SESSION, uToken.expirationTime, { expires: uToken.expirationTime });
+      this.cookie.put(COOKIE.TOKEN, uToken.token, {
+        expires: uToken.expirationTime
+      });
+      this.cookie.put(COOKIE.SESSION, uToken.expirationTime, {
+        expires: uToken.expirationTime
+      });
       this.set(AUTH_SUBJECT.SESSION, uToken.expirationTime);
 
       this.router.navigateByUrl(ROUTES.DEFAULT);
-    } catch(err) {
+    } catch (err) {
       this.set(AUTH_SUBJECT.ERROR, err.message);
     }
   }
 
   public logout(): void {
-    this.firebaseAuth.auth.signOut()
-      .then(() => {
-        this.cookie.remove(COOKIE.TOKEN);
-        this.cookie.remove(COOKIE.SESSION);
-        this.router.navigateByUrl(ROUTES.AUTH).then(() => location.reload());
-      });
+    this.firebaseAuth.auth.signOut().then(() => {
+      this.cookie.remove(COOKIE.TOKEN);
+      this.cookie.remove(COOKIE.SESSION);
+      this.router.navigateByUrl(ROUTES.AUTH).then(() => location.reload());
+    });
   }
 
   public get(key: keyof IAuthState): Subject<any> {
