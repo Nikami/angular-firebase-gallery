@@ -7,13 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 
 @NgModule({
-  imports: [
-    AuthRouting,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule
-  ],
+  imports: [AuthRouting, FormsModule, ReactiveFormsModule, SharedModule],
   declarations: [LoginComponent],
   providers: [AuthService]
 })
-export class AuthModule { }
+export class AuthModule {}

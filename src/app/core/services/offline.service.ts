@@ -11,8 +11,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class OfflineService implements OnDestroy {
   private offlineSubscription: Subscription;
 
-  constructor(private dialog: MatDialog) {
-  }
+  constructor(private dialog: MatDialog) {}
 
   public init(): void {
     this.offlineSubscription = fromEvent(window, 'offline').subscribe(() => {

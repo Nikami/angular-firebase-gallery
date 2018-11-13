@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit
+} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 export enum MessageDialogActions {
@@ -10,7 +15,7 @@ export enum MessageDialogActions {
 export interface IMsgDialogData {
   message: string;
   translateParams: { [key: string]: string };
-  actions: MessageDialogActions[]
+  actions: MessageDialogActions[];
 }
 
 @Component({
@@ -25,8 +30,7 @@ export class MessageDialogComponent implements OnInit {
     CLOSE: false
   };
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IMsgDialogData) {
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: IMsgDialogData) {}
 
   ngOnInit(): void {
     this.data.actions.forEach((action: MessageDialogActions) => {

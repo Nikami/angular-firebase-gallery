@@ -9,7 +9,10 @@ describe('CategoriesService', () => {
     });
   });
 
-  it('should be created', inject([CategoriesService], (service: CategoriesService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [CategoriesService],
+    (service: CategoriesService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

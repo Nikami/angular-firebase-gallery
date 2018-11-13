@@ -16,7 +16,7 @@ body {
 
 a {
   @extend .primary-text;
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
 
   &:hover {
     @extend .accent-text2;
@@ -66,7 +66,7 @@ a {
   &.heading-link {
     @extend .pointer;
     color: $primary-color;
-    transition: color .2s ease-in;
+    transition: color 0.2s ease-in;
 
     &:hover {
       color: $accent-color1;
@@ -81,7 +81,8 @@ a {
   }
 }
 
-[afgInputSelection], .selection {
+[afgInputSelection],
+.selection {
   color: $text-color4;
 
   &::selection {
@@ -91,7 +92,7 @@ a {
 }
 
 .spinner {
-  background-image: url('assets/icons/spinner.svg');
+  background-image: url("assets/icons/spinner.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-color: rgba($white-color, 0.8);

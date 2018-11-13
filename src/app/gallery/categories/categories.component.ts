@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import { CategoriesService } from '../services/categories.service';
 import { IFGalleryCategory } from '../../shared/shared.models';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -24,10 +31,11 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   private categoriesSubscription: Subscription;
 
-  constructor(private categories: CategoriesService,
-              private cdRef: ChangeDetectorRef,
-              private dialog: MatDialog) {
-  }
+  constructor(
+    private categories: CategoriesService,
+    private cdRef: ChangeDetectorRef,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.subscribeToCategories();
@@ -47,17 +55,20 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   openRemoveDialog(category: IFGalleryCategory): void {
     this.dialog.closeAll();
-    const dialogRef: MatDialogRef<MessageDialogComponent> = this.dialog.open(MessageDialogComponent, {
-      maxWidth: '350px',
-      panelClass: 'dialog-accent',
-      data: {
-        message: 'DIALOG.REMOVE_CATEGORY',
-        translateParams: {
-          name: category.name
-        },
-        actions: [MessageDialogActions.OK, MessageDialogActions.CANCEL]
+    const dialogRef: MatDialogRef<MessageDialogComponent> = this.dialog.open(
+      MessageDialogComponent,
+      {
+        maxWidth: '350px',
+        panelClass: 'dialog-accent',
+        data: {
+          message: 'DIALOG.REMOVE_CATEGORY',
+          translateParams: {
+            name: category.name
+          },
+          actions: [MessageDialogActions.OK, MessageDialogActions.CANCEL]
+        }
       }
-    });
+    );
 
     dialogRef.afterClosed().subscribe((isRemovalAccepted: boolean) => {
       if (isRemovalAccepted) {
@@ -76,9 +87,11 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToCategories(): void {
-    this.categoriesSubscription = this.categories.get().subscribe((categories: IFGalleryCategory[]) => {
-      this.ctgs = categories;
-      this.cdRef.detectChanges();
-    });
+    this.categoriesSubscription = this.categories
+      .get()
+      .subscribe((categories: IFGalleryCategory[]) => {
+        this.ctgs = categories;
+        this.cdRef.detectChanges();
+      });
   }
 }

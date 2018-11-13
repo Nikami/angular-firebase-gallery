@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AUTH_SUBJECT, AuthService } from '../services/auth.service';
 import { IUser } from '../../shared/shared.models';
@@ -49,7 +54,6 @@ export class LoginComponent {
     this.auth.get(AUTH_SUBJECT.ERROR).subscribe((error: string) => {
       this.errorMessage = error;
       this.rebuildForm();
-    })
+    });
   }
-
 }

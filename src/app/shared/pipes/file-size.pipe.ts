@@ -6,15 +6,13 @@ const FILE_SIZE_UNITS_LONG = [
   'Kilobytes',
   'Megabytes',
   'Gigabytes',
-  'Terabytes',
+  'Terabytes'
 ];
-
 
 @Pipe({
   name: 'fileSize'
 })
 export class FileSizePipe implements PipeTransform {
-
   transform(sizeInBytes: number, longForm: boolean): string {
     const units = longForm ? FILE_SIZE_UNITS_LONG : FILE_SIZE_UNITS;
 

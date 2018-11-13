@@ -8,9 +8,8 @@ describe('RenameCategoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RenameCategoryComponent ]
-    })
-    .compileComponents();
+      declarations: [RenameCategoryComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,9 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnInit
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CategoriesService } from '../../services/categories.service';
 import { first, map, startWith } from 'rxjs/operators';
-import { IFGalleryCategory, IFGalleryItem } from '../../../shared/shared.models';
+import {
+  IFGalleryCategory,
+  IFGalleryItem
+} from '../../../shared/shared.models';
 import { Observable, of } from 'rxjs';
 import { ImagesService } from '../../services/images.service';
 
@@ -22,7 +32,6 @@ interface IMoveImageForm {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MoveImageComponent implements OnInit {
-
   form: FormGroup;
   ctgs: IFGalleryCategory[] = [];
   filteredCategories: Observable<IFGalleryCategory[]>;
@@ -37,13 +46,14 @@ export class MoveImageComponent implements OnInit {
     }
   }
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IMoveImageData,
-              private fb: FormBuilder,
-              private dialogRef: MatDialogRef<MoveImageComponent>,
-              private cdRef: ChangeDetectorRef,
-              private categories: CategoriesService,
-              private images: ImagesService) {
-  }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: IMoveImageData,
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<MoveImageComponent>,
+    private cdRef: ChangeDetectorRef,
+    private categories: CategoriesService,
+    private images: ImagesService
+  ) {}
 
   ngOnInit(): void {
     this.subscribeToCategories();
@@ -57,10 +67,14 @@ export class MoveImageComponent implements OnInit {
   onSubmit({ value }: { value: IMoveImageForm }): void {
     this.errorMessage = '';
     this.isDisabled = true;
-    
-    let category: IFGalleryCategory = this.ctgs.find((ct: IFGalleryCategory) => ct.name === value.category);
+
+    let category: IFGalleryCategory = this.ctgs.find(
+      (ct: IFGalleryCategory) => ct.name === value.category
+    );
     if (category) {
-      this.images.update(this.data.img, { category: this.categories.getCategoryRefById(category.id) });
+      this.images.update(this.data.img, {
+        category: this.categories.getCategoryRefById(category.id)
+      });
       this.dialogRef.close();
     } else {
       this.errorMessage = 'MOVE_IMAGE.CATEGORY_IS_NOT_EXISTS';
@@ -69,12 +83,15 @@ export class MoveImageComponent implements OnInit {
   }
 
   private subscribeToCategories(): void {
-    this.categories.get().pipe(
-      first()
-    ).subscribe((categories: IFGalleryCategory[]) => {
-      this.ctgs = categories.filter((ct: IFGalleryCategory) => ct.name !== this.data.category);
-      this.filteredCategories = of(this.ctgs.slice());
-    });
+    this.categories
+      .get()
+      .pipe(first())
+      .subscribe((categories: IFGalleryCategory[]) => {
+        this.ctgs = categories.filter(
+          (ct: IFGalleryCategory) => ct.name !== this.data.category
+        );
+        this.filteredCategories = of(this.ctgs.slice());
+      });
   }
 
   private createForm(): void {
@@ -84,13 +101,17 @@ export class MoveImageComponent implements OnInit {
 
     this.filteredCategories = this.form.controls.category.valueChanges.pipe(
       startWith(''),
-      map((category: string) => category ? this.filterCategories(category) : this.ctgs.slice())
+      map((category: string) =>
+        category ? this.filterCategories(category) : this.ctgs.slice()
+      )
     );
   }
 
   private filterCategories(value: string): IFGalleryCategory[] {
     const filterValue = value.toLowerCase();
-    return this.ctgs.filter(category => category.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.ctgs.filter(
+      category => category.name.toLowerCase().indexOf(filterValue) === 0
+    );
   }
 
   private rebuildForm(): void {

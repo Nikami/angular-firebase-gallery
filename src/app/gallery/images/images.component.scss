@@ -6,7 +6,7 @@
 }
 
 .animation-pulse {
-  animation-duration: .5s;
+  animation-duration: 0.5s;
   animation-fill-mode: forwards;
 }
 
@@ -19,7 +19,7 @@
 .img-block {
   padding-top: 1rem;
 
-  &[draggable=true] {
+  &[draggable="true"] {
     cursor: grab;
 
     .pointer {
@@ -29,7 +29,7 @@
 
   &.hovered {
     @extend .animation-jello;
-    animation-duration: .5s;
+    animation-duration: 0.5s;
     animation-fill-mode: forwards;
 
     .mask {
@@ -64,7 +64,8 @@
 
 .image-title {
   background-color: $white-color;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   padding: 1rem;
   width: 100%;
   overflow: hidden;

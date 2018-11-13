@@ -1,4 +1,10 @@
-import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  Renderer2
+} from '@angular/core';
 
 interface ISpinnerOptions {
   isShown: boolean;
@@ -31,15 +37,13 @@ export class SpinnerDirective {
 
       if (this.options.isShown) {
         this.add();
-      } else if(!this.options.isShown && this.spinnerEl) {
+      } else if (!this.options.isShown && this.spinnerEl) {
         this.remove();
       }
     }
   }
 
-  constructor(public el: ElementRef,
-              private renderer: Renderer2) {
-  }
+  constructor(public el: ElementRef, private renderer: Renderer2) {}
 
   private add(): void {
     this.parentEl = this.renderer.parentNode(this.el.nativeElement);
@@ -49,6 +53,9 @@ export class SpinnerDirective {
   }
 
   private remove(): void {
-    setTimeout(() => this.renderer.removeChild(this.parentEl, this.spinnerEl), 200);
+    setTimeout(
+      () => this.renderer.removeChild(this.parentEl, this.spinnerEl),
+      200
+    );
   }
 }

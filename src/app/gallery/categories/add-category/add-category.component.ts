@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input
+} from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriesService } from '../../services/categories.service';
@@ -25,10 +30,12 @@ export class AddCategoryComponent {
     }
   }
 
-  constructor(private fb: FormBuilder,
-              private dialogRef: MatDialogRef<AddCategoryComponent>,
-              private cdRef: ChangeDetectorRef,
-              private categories: CategoriesService) {
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<AddCategoryComponent>,
+    private cdRef: ChangeDetectorRef,
+    private categories: CategoriesService
+  ) {
     this.createForm();
   }
 
@@ -44,8 +51,9 @@ export class AddCategoryComponent {
 
   onSubmit({ value }: { value: IAddCategoryForm }): void {
     this.isDisabled = true;
-    this.categories.add(value).pipe(
-      first()
-    ).subscribe(() => this.closeDialog());
+    this.categories
+      .add(value)
+      .pipe(first())
+      .subscribe(() => this.closeDialog());
   }
 }

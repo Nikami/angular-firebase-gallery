@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ImagesService } from '../../services/images.service';
@@ -26,11 +33,12 @@ export class ImageComponent implements OnInit {
   editMode: boolean = false;
   form: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IImageDialogData,
-              private fb: FormBuilder,
-              private dialogRef: MatDialogRef<ImageComponent>,
-              private images: ImagesService) {
-  }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: IImageDialogData,
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<ImageComponent>,
+    private images: ImagesService
+  ) {}
 
   ngOnInit(): void {
     this.createForm();

@@ -14,7 +14,8 @@ interface IRoute {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent {
-  @HostBinding('class') classList: string = 'd-flex flex-column navbar fixed-top';
+  @HostBinding('class') classList: string =
+    'd-flex flex-column navbar fixed-top';
 
   routes: Array<IRoute> = [
     {
@@ -23,8 +24,7 @@ export class NavigationComponent {
     }
   ];
 
-  constructor(private auth: AuthService) {
-  }
+  constructor(private auth: AuthService) {}
 
   logout(): void {
     this.auth.logout();

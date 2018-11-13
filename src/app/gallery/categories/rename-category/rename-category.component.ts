@@ -1,11 +1,17 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CategoriesService } from '../../services/categories.service';
 import { IFGalleryCategory } from '../../../shared/shared.models';
 
 export interface IRenameCategoryData {
-  category: IFGalleryCategory
+  category: IFGalleryCategory;
 }
 
 interface IRenameCategoryForm {
@@ -29,11 +35,13 @@ export class RenameCategoryComponent {
     }
   }
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IRenameCategoryData,
-              private fb: FormBuilder,
-              private dialogRef: MatDialogRef<IRenameCategoryForm>,
-              private cdRef: ChangeDetectorRef,
-              private categories: CategoriesService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: IRenameCategoryData,
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<IRenameCategoryForm>,
+    private cdRef: ChangeDetectorRef,
+    private categories: CategoriesService
+  ) {
     this.createForm();
   }
 

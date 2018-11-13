@@ -17,7 +17,7 @@ export interface IDragAndDropOptions {
 export class DragAndDropDirective {
   private options: IDragAndDropOptions = {};
 
-  constructor() { }
+  constructor() {}
 
   @Input()
   set afgDnD(options: Object) {

@@ -18,12 +18,7 @@ import { MoveImageComponent } from './images/move-image/move-image.component';
 import { RenameCategoryComponent } from './categories/rename-category/rename-category.component';
 
 @NgModule({
-  imports: [
-    GalleryRouting,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule
-  ],
+  imports: [GalleryRouting, FormsModule, ReactiveFormsModule, SharedModule],
   declarations: [
     GalleryComponent,
     CategoriesComponent,
@@ -42,6 +37,12 @@ import { RenameCategoryComponent } from './categories/rename-category/rename-cat
     MoveImageComponent,
     RenameCategoryComponent
   ],
-  providers: [AuthService, GalleryGuard, GalleryService, CategoriesService, ImagesService]
+  providers: [
+    AuthService,
+    GalleryGuard,
+    GalleryService,
+    CategoriesService,
+    ImagesService
+  ]
 })
-export class GalleryModule { }
+export class GalleryModule {}

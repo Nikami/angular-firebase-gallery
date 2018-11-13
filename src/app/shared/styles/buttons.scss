@@ -3,7 +3,8 @@
 $toolbar-btn-height: 40px;
 $toolbar-btn-icon-size: 18px;
 
-.remove-btn, .move-btn {
+.remove-btn,
+.move-btn {
   .mat-icon {
     font-size: $toolbar-btn-icon-size;
     height: $toolbar-btn-icon-size;

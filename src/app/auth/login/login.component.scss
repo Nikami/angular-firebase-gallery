@@ -3,7 +3,7 @@
 $login-width: 34rem;
 
 :host {
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/angular-firebase-gallery-ff4f7.appspot.com/o/afg%2Fmat_bg.jpg?alt=media&token=f3e4401e-2235-48c6-ab86-0eac823e01c3');
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/angular-firebase-gallery-ff4f7.appspot.com/o/afg%2Fmat_bg.jpg?alt=media&token=f3e4401e-2235-48c6-ab86-0eac823e01c3");
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -23,7 +23,8 @@ $login-width: 34rem;
   background-color: darken($primary-color, 10%);
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   color: $white-color;
   font-size: 2rem;
   padding: 24px;

@@ -8,9 +8,10 @@ import { OfflineService } from './core/services/offline.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private session: SessionExpirationService,
-              private offline: OfflineService) {
-  }
+  constructor(
+    private session: SessionExpirationService,
+    private offline: OfflineService
+  ) {}
 
   ngOnInit(): void {
     this.session.init();

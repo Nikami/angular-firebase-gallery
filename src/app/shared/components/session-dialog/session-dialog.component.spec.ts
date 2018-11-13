@@ -8,9 +8,8 @@ describe('SessionDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SessionDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [SessionDialogComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
