@@ -14,11 +14,11 @@ import { IFGalleryItem } from '../../shared/shared.models';
 import { DocumentReference } from 'angularfire2/firestore';
 import { CategoriesService } from '../services/categories.service';
 import { MatDialog } from '@angular/material';
-import { UploadComponent } from '../upload/upload.component';
+import { UploadComponent } from './upload/upload.component';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDragAndDropOptions } from '../../shared/directives/drag-and-drop.directive';
-import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
-import { MoveImageComponent } from '../move-image/move-image.component';
+import { ImageComponent } from './image/image.component';
+import { MoveImageComponent } from './move-image/move-image.component';
 
 @Component({
   selector: 'afg-images',
@@ -88,8 +88,8 @@ export class ImagesComponent implements OnInit, OnDestroy {
   onImageDrop(data: IDragAndDropOptions[]): void {
     const target1: IFGalleryItem = this.imgs.find(img => img.id === data[0].id);
     const target2: IFGalleryItem = this.imgs.find(img => img.id === data[1].id);
-    this.images.changeImgOrder(target1, data[1].order);
-    this.images.changeImgOrder(target2, data[0].order);
+    this.images.update(target1, { order: data[1].order });
+    this.images.update(target2, { order: data[0].order });
   }
 
   onImageDragging(isDragging: boolean): void {
@@ -105,7 +105,7 @@ export class ImagesComponent implements OnInit, OnDestroy {
   openImageDialog(img: IFGalleryItem): void {
     if (!this.editMode) {
       this.dialog.closeAll();
-      this.dialog.open(ImageDialogComponent, {
+      this.dialog.open(ImageComponent, {
         maxWidth: 'auto',
         panelClass: ['dialog-primary', 'container'],
         disableClose: true,

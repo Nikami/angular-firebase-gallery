@@ -1,0 +1,38 @@
+<div mat-dialog-title class="d-flex align-items-center position-relative">
+
+  <div class="mono-font text-uppercase">
+    <span class="accent-text2">#</span>
+    {{ 'RENAME_CATEGORY.TITLE' | translate }}
+  </div>
+
+  <button mat-mini-fab (click)="closeDialog()" type="button" class="position-absolute dialog-close-btn">
+    <mat-icon class="mini-icon">close</mat-icon>
+  </button>
+
+</div>
+
+<div mat-dialog-content>
+
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit(form)"
+        class="d-flex flex-column">
+
+    <mat-form-field class="mb-3">
+      <input type="text"
+             matInput
+             formControlName="name"
+             autocomplete="off"
+             placeholder="{{ 'RENAME_CATEGORY.PLACEHOLDER' | translate }}">
+    </mat-form-field>
+
+    <button [disabled]="form.invalid || form.disabled"
+            cdkFocusInitial
+            type="submit"
+            mat-raised-button
+            color="primary"
+            class="mt-4">
+      {{ 'RENAME' | translate  }}
+    </button>
+  </form>
+
+</div>

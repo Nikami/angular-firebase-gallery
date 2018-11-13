@@ -1,29 +1,8 @@
 @import "../../shared/styles/variables";
 @import "../../shared/styles/animations";
 
-$toolbar-btn-height: 40px;
-
 :host {
   width: 100%;
-}
-
-.remove-btn {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: -0.8rem !important;
-  margin-right: -0.8rem;
-  z-index: 1;
-}
-
-.move-btn {
-  visibility: hidden;
-  position: absolute;
-  top: $toolbar-btn-height;
-  right: 0;
-  margin-right: -0.8rem;
-  z-index: 1;
 }
 
 .animation-pulse {

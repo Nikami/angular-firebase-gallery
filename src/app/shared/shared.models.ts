@@ -7,16 +7,16 @@ export interface IUser {
 
 export interface IFGalleryCategory {
   id?: string;
-  name: string;
+  name?: string;
 }
 
 export interface IFGalleryItem {
   id?: string;
-  uid: string;
-  category: DocumentReference;
-  title: string;
-  order: number;
-  url: string;
+  uid?: string;
+  category?: DocumentReference;
+  title?: string;
+  order?: number;
+  url?: string;
 }
 
 export enum DB {

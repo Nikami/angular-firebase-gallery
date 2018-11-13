@@ -30,6 +30,7 @@
 
           <button (click)="removeImage(img)"
                   [ngClass]="{'visible animation-pulse': editMode && !isDragging}"
+                  matTooltip="{{ 'REMOVE' | translate }}"
                   mat-mini-fab=""
                   color="warn"
                   type="button"
@@ -39,7 +40,7 @@
 
           <button (click)="moveImage(img)"
                   [ngClass]="{'visible animation-pulse': editMode && !isDragging}"
-                  matTooltip="{{ 'IMAGES.MOVE_IMAGE' | translate }}"
+                  matTooltip="{{ 'MOVE' | translate }}"
                   mat-mini-fab=""
                   type="button"
                   class="move-btn">

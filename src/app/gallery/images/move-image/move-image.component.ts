@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { CategoriesService } from '../services/categories.service';
+import { CategoriesService } from '../../services/categories.service';
 import { first, map, startWith } from 'rxjs/operators';
-import { IFGalleryCategory, IFGalleryItem } from '../../shared/shared.models';
+import { IFGalleryCategory, IFGalleryItem } from '../../../shared/shared.models';
 import { Observable, of } from 'rxjs';
-import { ImagesService } from '../services/images.service';
+import { ImagesService } from '../../services/images.service';
 
 interface IMoveImageData {
   category: string;
@@ -60,7 +60,7 @@ export class MoveImageComponent implements OnInit {
     
     let category: IFGalleryCategory = this.ctgs.find((ct: IFGalleryCategory) => ct.name === value.category);
     if (category) {
-      this.images.move(this.data.img, this.categories.getCategoryRefById(category.id));
+      this.images.update(this.data.img, { category: this.categories.getCategoryRefById(category.id) });
       this.dialogRef.close();
     } else {
       this.errorMessage = 'MOVE_IMAGE.CATEGORY_IS_NOT_EXISTS';

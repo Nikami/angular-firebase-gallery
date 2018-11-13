@@ -3,11 +3,12 @@ import { CategoriesService } from '../services/categories.service';
 import { IFGalleryCategory } from '../../shared/shared.models';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { AddCategoryComponent } from '../add-category/add-category.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 import {
   MessageDialogActions,
   MessageDialogComponent
 } from '../../shared/components/message-dialog/message-dialog.component';
+import { RenameCategoryComponent } from './rename-category/rename-category.component';
 
 @Component({
   selector: 'afg-categories',
@@ -30,13 +31,6 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeToCategories();
-  }
-
-  subscribeToCategories(): void {
-    this.categoriesSubscription = this.categories.get().subscribe((categories: IFGalleryCategory[]) => {
-      this.ctgs = categories;
-      this.cdRef.detectChanges();
-    });
   }
 
   ngOnDestroy(): void {
@@ -69,6 +63,22 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       if (isRemovalAccepted) {
         this.categories.remove(category).subscribe();
       }
+    });
+  }
+
+  openRenameDialog(category: IFGalleryCategory): void {
+    this.dialog.closeAll();
+    this.dialog.open(RenameCategoryComponent, {
+      maxWidth: '450px',
+      panelClass: 'dialog-primary',
+      data: { category }
+    });
+  }
+
+  private subscribeToCategories(): void {
+    this.categoriesSubscription = this.categories.get().subscribe((categories: IFGalleryCategory[]) => {
+      this.ctgs = categories;
+      this.cdRef.detectChanges();
     });
   }
 }

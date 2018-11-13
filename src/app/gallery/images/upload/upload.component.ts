@@ -3,11 +3,11 @@ import { AngularFireUploadTask } from 'angularfire2/storage';
 import { DocumentReference } from 'angularfire2/firestore';
 import { UploadedFile } from './uploaded-file';
 import { ActivatedRoute } from '@angular/router';
-import { ImagesService } from '../services/images.service';
-import { UtilsService } from '../../core/services/utils.service';
+import { ImagesService } from '../../services/images.service';
+import { UtilsService } from '../../../core/services/utils.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FIRE_STORAGE_PATH } from '../../app.config';
-import { FirebaseApiService } from '../../core/services/firebase-api.service';
+import { FIRE_STORAGE_PATH } from '../../../app.config';
+import { FirebaseApiService } from '../../../core/services/firebase-api.service';
 
 export interface IUploadData {
   category: DocumentReference;

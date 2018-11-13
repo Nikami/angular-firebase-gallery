@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/internal/Observable';
-import { IFGalleryItem } from '../../shared/shared.models';
+import { IFGalleryItem } from '../../../shared/shared.models';
 import { DocumentReference } from 'angularfire2/firestore';
 
 export class UploadedFile {

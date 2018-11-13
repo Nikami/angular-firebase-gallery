@@ -50,6 +50,10 @@ export class CategoriesService {
     );
   }
 
+  update(doc: IFGalleryCategory, props: IFGalleryCategory): void {
+    this.fapi.updateCollection(DB.categories, doc, props);
+  }
+
   getCategoryRefById(pushId: string): DocumentReference {
     return this.fapi.getDocRefByPushId(DB.categories, pushId);
   }

@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ImagesService } from '../services/images.service';
-import { IFGalleryItem } from '../../shared/shared.models';
+import { ImagesService } from '../../services/images.service';
+import { IFGalleryItem } from '../../../shared/shared.models';
 
 export interface IImageDialogData {
   img: IFGalleryItem;
@@ -14,11 +14,11 @@ interface IDialogForm {
 
 @Component({
   selector: 'afg-image-dialog',
-  templateUrl: './image-dialog.component.html',
-  styleUrls: ['./image-dialog.component.scss'],
+  templateUrl: './image.component.html',
+  styleUrls: ['./image.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ImageDialogComponent implements OnInit {
+export class ImageComponent implements OnInit {
   @ViewChild('ngForm') ngForm: NgForm;
   @ViewChild('title') private titleEl: ElementRef;
 
@@ -28,7 +28,7 @@ export class ImageDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: IImageDialogData,
               private fb: FormBuilder,
-              private dialogRef: MatDialogRef<ImageDialogComponent>,
+              private dialogRef: MatDialogRef<ImageComponent>,
               private images: ImagesService) {
   }
 
@@ -66,7 +66,7 @@ export class ImageDialogComponent implements OnInit {
 
   private renameImg(): void {
     if (this.title && this.title !== this.data.img.title) {
-      this.images.rename(this.data.img, this.title);
+      this.images.update(this.data.img, { title: this.title });
     }
   }
 }

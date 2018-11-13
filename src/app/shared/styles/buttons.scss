@@ -1,0 +1,31 @@
+@import "variables";
+
+$toolbar-btn-height: 40px;
+$toolbar-btn-icon-size: 18px;
+
+.remove-btn, .move-btn {
+  .mat-icon {
+    font-size: $toolbar-btn-icon-size;
+    height: $toolbar-btn-icon-size;
+    width: $toolbar-btn-icon-size;
+  }
+}
+
+.remove-btn {
+  visibility: hidden;
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  margin-top: -0.8rem !important;
+  margin-right: -0.8rem;
+  z-index: 1;
+}
+
+.move-btn {
+  visibility: hidden;
+  position: absolute !important;
+  top: $toolbar-btn-height;
+  right: 0;
+  margin-right: -0.8rem;
+  z-index: 1;
+}

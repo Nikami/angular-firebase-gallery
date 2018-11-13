@@ -35,14 +35,8 @@ export class ImagesService {
     this.fapi.addToCollection(DB.images, doc);
   }
 
-  // TODO: rewrite to one method update
-  rename(doc: IFGalleryItem, title: string): void {
-    this.fapi.updateCollection(DB.images, doc, { title });
-  }
-
-  // TODO: rewrite to one method update
-  move(doc: IFGalleryItem, category: DocumentReference): void {
-    this.fapi.updateCollection(DB.images, doc, { category });
+  update(doc: IFGalleryItem, props: IFGalleryItem): void {
+    this.fapi.updateCollection(DB.images, doc, props);
   }
 
   remove(doc: IFGalleryItem): Observable<any> {
@@ -50,10 +44,5 @@ export class ImagesService {
       from(this.fapi.removeFromCollection(DB.images, doc)),
       this.fapi.removeFromStorage(FIRE_STORAGE_PATH, doc)
     );
-  }
-
-  // TODO: rewrite to one method update
-  changeImgOrder(doc: IFGalleryItem, order: number): void {
-    this.fapi.updateCollection(DB.images, doc, { order });
   }
 }

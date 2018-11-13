@@ -23,11 +23,21 @@
 
     <button (click)="openRemoveDialog(category)"
             [ngClass]="{'visible animation-pulse': editMode}"
+            matTooltip="{{ 'REMOVE' | translate }}"
             mat-mini-fab=""
             color="warn"
             type="button"
             class="remove-btn">
       <mat-icon>clear</mat-icon>
+    </button>
+
+    <button (click)="openRenameDialog(category)"
+            [ngClass]="{'visible animation-pulse': editMode && !isDragging}"
+            matTooltip="{{ 'RENAME' | translate }}"
+            mat-mini-fab=""
+            type="button"
+            class="move-btn">
+      <mat-icon>edit</mat-icon>
     </button>
 
     <mat-card [routerLink]="['/gallery/images']"

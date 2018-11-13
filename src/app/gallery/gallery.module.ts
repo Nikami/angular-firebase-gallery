@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { GalleryComponent } from './gallery.component';
 import { SharedModule } from '../shared';
 import { GalleryRouting } from './gallery.routing';
@@ -8,14 +7,15 @@ import { AuthService } from '../auth/services/auth.service';
 import { GalleryService } from './services/gallery.service';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoriesService } from './services/categories.service';
-import { UploadComponent } from './upload/upload.component';
+import { UploadComponent } from './images/upload/upload.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ImagesComponent } from './images/images.component';
 import { ImagesService } from './services/images.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddCategoryComponent } from './add-category/add-category.component';
-import { ImageDialogComponent } from './image-dialog/image-dialog.component';
-import { MoveImageComponent } from './move-image/move-image.component';
+import { AddCategoryComponent } from './categories/add-category/add-category.component';
+import { ImageComponent } from './images/image/image.component';
+import { MoveImageComponent } from './images/move-image/move-image.component';
+import { RenameCategoryComponent } from './categories/rename-category/rename-category.component';
 
 @NgModule({
   imports: [
@@ -31,10 +31,17 @@ import { MoveImageComponent } from './move-image/move-image.component';
     ImagesComponent,
     UploadComponent,
     AddCategoryComponent,
-    ImageDialogComponent,
-    MoveImageComponent
+    ImageComponent,
+    MoveImageComponent,
+    RenameCategoryComponent
   ],
-  entryComponents: [UploadComponent, AddCategoryComponent, ImageDialogComponent, MoveImageComponent],
+  entryComponents: [
+    UploadComponent,
+    AddCategoryComponent,
+    ImageComponent,
+    MoveImageComponent,
+    RenameCategoryComponent
+  ],
   providers: [AuthService, GalleryGuard, GalleryService, CategoriesService, ImagesService]
 })
 export class GalleryModule { }
