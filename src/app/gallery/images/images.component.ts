@@ -81,7 +81,7 @@ export class ImagesComponent implements OnInit, OnDestroy {
     this.dialog.closeAll();
     this.dialog.open(MoveImageComponent, {
       maxWidth: 'auto',
-      panelClass: ['dialog-primary', 'container'],
+      panelClass: ['dialog-primary'],
       disableClose: true,
       data: { img, category: this.categoryName }
     });

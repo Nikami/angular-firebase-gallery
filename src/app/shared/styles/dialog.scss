@@ -10,6 +10,8 @@ mat-icon.mini-icon {
 .dialog-primary,
 .dialog-accent {
   .mat-dialog-title {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     color: $white-color;
   }
 
