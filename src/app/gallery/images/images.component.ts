@@ -19,6 +19,8 @@ import { IDragAndDropOptions } from '../../shared/directives/drag-and-drop.direc
 import { ImageComponent } from './image/image.component';
 import { MoveImageComponent } from './move-image/move-image.component';
 import { DocumentReference } from '@angular/fire/firestore';
+import { FormControl } from '@angular/forms';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'afg-images',
@@ -30,6 +32,7 @@ export class ImagesComponent implements OnInit, OnDestroy {
   @ViewChild('imagesContainer') imagesContainer: ElementRef;
 
   private imagesSubscription: Subscription;
+  private searchControlSubscription: Subscription;
   private categoryId: string;
   private lastImgIdx: number;
 
@@ -38,6 +41,8 @@ export class ImagesComponent implements OnInit, OnDestroy {
   public editMode: boolean = false;
   public imgs: IFGalleryItem[] = [];
   public isDragging: boolean = false;
+  public searchControl: FormControl = new FormControl();
+  public filteredImages: IFGalleryItem[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -54,10 +59,12 @@ export class ImagesComponent implements OnInit, OnDestroy {
     this.categoryRef = this.categories.getCategoryRefById(this.categoryId);
 
     this.subscribeToImages();
+    this.subscribeToSearch();
   }
 
   ngOnDestroy(): void {
     this.imagesSubscription.unsubscribe();
+    this.searchControlSubscription.unsubscribe();
   }
 
   openUploadDialog(): void {
@@ -125,7 +132,30 @@ export class ImagesComponent implements OnInit, OnDestroy {
           images.length > 0
             ? Math.max.apply(Math, this.imgs.map(img => img.order))
             : 0;
+        this.searchControl.patchValue(this.searchControl.value || '');
+      });
+  }
+
+  // TODO: mb refactor search to component in future
+  private subscribeToSearch(): void {
+    this.searchControlSubscription = this.searchControl.valueChanges
+      .pipe(
+        debounceTime(400),
+        map((title: string) =>
+          title ? this.filterImages(title) : this.imgs.slice()
+        )
+      )
+      .subscribe((images: IFGalleryItem[]) => {
+        this.filteredImages = images;
         this.cdRef.detectChanges();
       });
+  }
+
+  private filterImages(value: string): IFGalleryItem[] {
+    const filterValue = value.toLowerCase();
+    return this.imgs.filter(
+      (image: IFGalleryItem) =>
+        image.title.toLowerCase().indexOf(filterValue) === 0
+    );
   }
 }

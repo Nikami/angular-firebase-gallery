@@ -34,7 +34,7 @@ interface IMoveImageForm {
 export class MoveImageComponent implements OnInit {
   form: FormGroup;
   ctgs: IFGalleryCategory[] = [];
-  filteredCategories: Observable<IFGalleryCategory[]>;
+  filteredCategories$: Observable<IFGalleryCategory[]>;
   errorMessage: string;
 
   @Input()
@@ -90,7 +90,7 @@ export class MoveImageComponent implements OnInit {
         this.ctgs = categories.filter(
           (ct: IFGalleryCategory) => ct.name !== this.data.category
         );
-        this.filteredCategories = of(this.ctgs.slice());
+        this.form.controls.category.patchValue('');
       });
   }
 
@@ -99,8 +99,7 @@ export class MoveImageComponent implements OnInit {
       category: ['', Validators.required]
     });
 
-    this.filteredCategories = this.form.controls.category.valueChanges.pipe(
-      startWith(''),
+    this.filteredCategories$ = this.form.controls.category.valueChanges.pipe(
       map((category: string) =>
         category ? this.filterCategories(category) : this.ctgs.slice()
       )

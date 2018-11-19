@@ -6,6 +6,9 @@
     "EMAIL": "Email",
     "PASSWORD": "Password"
   },
+  "NAV": {
+    "GALLERY": "Gallery"
+  },
   "CATEGORIES": {
     "ADD_NEW_CATEGORY": "Add new category"
   },
@@ -32,8 +35,7 @@
     "UNSUPPORTED": "Unsupported file type :("
   },
   "IMAGES": {
-    "UPLOAD_IMG": "Upload image",
-    "GALLERY": "Gallery"
+    "UPLOAD_IMG": "Upload image"
   },
   "EDIT_MODE": "Edit mode",
   "LOGOUT": "Logout",
@@ -43,6 +45,8 @@
   "RENAME": "Rename",
   "REMOVE": "Remove",
   "MOVE": "Move",
+  "SEARCH": "Search",
+  "NO_RESULTS": "No results found.",
   "DIALOG": {
     "REMOVE_CATEGORY": "Are you sure you want to delete <strong>{{name}}</strong>? All images associated with it will be deleted as well.",
     "WARNING": "Warning",

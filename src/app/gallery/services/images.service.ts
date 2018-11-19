@@ -16,7 +16,13 @@ import {
 export class ImagesService {
   constructor(private fapi: FirebaseApiService) {}
 
-  // TODO: mb should refactor this later
+  get(): Observable<IFGalleryItem[]> {
+    return this.fapi
+      .getCollection(DB.images)
+      .snapshotChanges()
+      .pipe(map(this.mapActions));
+  }
+
   getByCategoryRef(
     categoryRef: DocumentReference
   ): Observable<IFGalleryItem[]> {
@@ -25,15 +31,7 @@ export class ImagesService {
         ref.where('category', '==', categoryRef).orderBy('order')
       )
       .snapshotChanges()
-      .pipe(
-        map((actions: DocumentChangeAction<IFGalleryItem>[]) => {
-          return actions.map((a: DocumentChangeAction<IFGalleryItem>) => {
-            const data: IFGalleryItem = a.payload.doc.data();
-            const id: string = a.payload.doc.id;
-            return { id, ...data };
-          });
-        })
-      );
+      .pipe(map(this.mapActions));
   }
 
   add(doc: IFGalleryItem): void {
@@ -49,5 +47,15 @@ export class ImagesService {
       from(this.fapi.removeFromCollection(DB.images, doc)),
       this.fapi.removeFromStorage(FIRE_STORAGE_PATH, doc)
     );
+  }
+
+  private mapActions(
+    actions: DocumentChangeAction<IFGalleryItem>[]
+  ): IFGalleryItem[] {
+    return actions.map((a: DocumentChangeAction<IFGalleryItem>) => {
+      const data: IFGalleryItem = a.payload.doc.data();
+      const id: string = a.payload.doc.id;
+      return { id, ...data };
+    });
   }
 }

@@ -12,7 +12,6 @@ export enum ROUTES {
   DEFAULT = 'gallery/categories',
   GALLERY = 'gallery',
   CATEGORIES = 'categories',
-  UPLOAD = 'upload',
   IMAGES = 'images'
 }
 

@@ -1,12 +1,33 @@
-<h1 class="heading">
+<div class="d-flex justify-content-between">
+
+  <h1 class="heading">
 
   <span class="d-flex align-items-center mono-font accent-text2 mr-2 heading-logo">
     <mat-icon>pages</mat-icon>
   </span>
 
-  {{ 'IMAGES.GALLERY' | translate }}
+    {{ 'NAV.GALLERY' | translate }}
 
-</h1>
+  </h1>
+
+  <mat-form-field class="ml-3">
+    <input type="text"
+           matInput
+           autocomplete="off"
+           [matAutocomplete]="auto"
+           [formControl]="searchControl"
+           placeholder="{{ 'SEARCH' | translate }}">
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let ct of filteredCtgs" [value]="ct.name">
+        {{ ct.name }}
+      </mat-option>
+    </mat-autocomplete>
+
+  </mat-form-field>
+
+</div>
+
 
 <div class="d-flex mb-5">
 
@@ -18,7 +39,7 @@
 
 <div class="row flex-wrap w-100">
 
-  <div *ngFor="let category of ctgs"
+  <div *ngFor="let category of filteredCtgs"
        class="position-relative col-md-4 col-12 mb-4">
 
     <button (click)="openRemoveDialog(category)"
@@ -32,7 +53,7 @@
     </button>
 
     <button (click)="openRenameDialog(category)"
-            [ngClass]="{'visible animation-pulse': editMode && !isDragging}"
+            [ngClass]="{'visible animation-pulse': editMode}"
             matTooltip="{{ 'RENAME' | translate }}"
             mat-mini-fab=""
             type="button"
@@ -53,6 +74,11 @@
 
     </mat-card>
 
+  </div>
+
+  <div *ngIf="searchControl.dirty && filteredCtgs.length === 0"
+       class="search-no-results mono-font text-center text-uppercase w-100 mt-3 mb-3">
+    {{ 'NO_RESULTS' | translate }}
   </div>
 
 </div>

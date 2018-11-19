@@ -102,6 +102,11 @@ a {
   width: 100%;
 }
 
+.search-no-results {
+  font-size: 1.8rem;
+  color: $text-color4;
+}
+
 // NOTE: This is for material dialogs, bootstrap has z-index: 1030 on position-fixed classes
 .cdk-overlay-container {
   z-index: 1031;
