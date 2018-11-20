@@ -16,8 +16,7 @@
       <mat-icon class="mini-icon">done</mat-icon>
     </button>
 
-    <form #ngForm="ngForm"
-          [formGroup]="form"
+    <form [formGroup]="form"
           (ngSubmit)="onSubmit(form); disableForm()"
           class="w-100">
 

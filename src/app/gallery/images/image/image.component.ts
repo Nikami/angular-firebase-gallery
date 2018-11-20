@@ -7,7 +7,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ImagesService } from '../../services/images.service';
 import { IFGalleryItem } from '../../../shared/shared.models';
 
@@ -26,7 +26,6 @@ interface IDialogForm {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImageComponent implements OnInit {
-  @ViewChild('ngForm') ngForm: NgForm;
   @ViewChild('title') private titleEl: ElementRef;
 
   title: string;
