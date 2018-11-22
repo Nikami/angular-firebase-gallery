@@ -21,6 +21,10 @@ import { MoveImageComponent } from './move-image/move-image.component';
 import { DocumentReference } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
 import { debounceTime, map } from 'rxjs/operators';
+import {
+  Spinner,
+  SpinnerService
+} from '../../spinner/services/spinner.service';
 
 @Component({
   selector: 'afg-images',
@@ -35,6 +39,7 @@ export class ImagesComponent implements OnInit, OnDestroy {
   private searchControlSubscription: Subscription;
   private categoryId: string;
   private lastImgIdx: number;
+  private spinner: Spinner;
 
   public categoryName: string;
   public categoryRef: DocumentReference;
@@ -50,10 +55,14 @@ export class ImagesComponent implements OnInit, OnDestroy {
     private images: ImagesService,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    private spinnerService: SpinnerService
+  ) {
+    this.spinner = this.spinnerService.getGlobal();
+  }
 
   ngOnInit(): void {
+    this.spinner.run();
     this.categoryId = this.route.snapshot.queryParamMap.get('id');
     this.categoryName = this.route.snapshot.queryParamMap.get('name');
     this.categoryRef = this.categories.getCategoryRefById(this.categoryId);
@@ -65,6 +74,10 @@ export class ImagesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.imagesSubscription.unsubscribe();
     this.searchControlSubscription.unsubscribe();
+  }
+
+  trackByFn(idx: number, img: IFGalleryItem): string {
+    return img.id;
   }
 
   openUploadDialog(): void {
@@ -133,6 +146,7 @@ export class ImagesComponent implements OnInit, OnDestroy {
             ? Math.max.apply(Math, this.imgs.map(img => img.order))
             : 0;
         this.searchControl.patchValue(this.searchControl.value || '');
+        this.spinner.stop();
       });
   }
 

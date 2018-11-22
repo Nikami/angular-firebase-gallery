@@ -18,6 +18,10 @@ import {
 import { RenameCategoryComponent } from './rename-category/rename-category.component';
 import { FormControl } from '@angular/forms';
 import { debounceTime, map } from 'rxjs/operators';
+import {
+  Spinner,
+  SpinnerService
+} from '../../spinner/services/spinner.service';
 
 @Component({
   selector: 'afg-categories',
@@ -35,14 +39,19 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   private categoriesSubscription: Subscription;
   private searchControlSubscription: Subscription;
+  private spinner: Spinner;
 
   constructor(
     private categories: CategoriesService,
     private cdRef: ChangeDetectorRef,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private spinnerService: SpinnerService
+  ) {
+    this.spinner = this.spinnerService.getGlobal();
+  }
 
   ngOnInit(): void {
+    this.spinner.run();
     this.subscribeToCategories();
     this.subscribeToSearch();
   }
@@ -113,6 +122,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       .subscribe((ctgs: IFGalleryCategory[]) => {
         this.filteredCtgs = ctgs;
         this.cdRef.detectChanges();
+        this.spinner.stop();
       });
   }
 

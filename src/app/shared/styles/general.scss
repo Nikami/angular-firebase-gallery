@@ -91,17 +91,6 @@ a {
   }
 }
 
-.spinner {
-  background-image: url("assets/icons/spinner.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: rgba($white-color, 0.8);
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-}
-
 .search-no-results {
   font-size: 1.8rem;
   color: $text-color4;

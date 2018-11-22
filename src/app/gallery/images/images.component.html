@@ -35,9 +35,9 @@
   </mat-slide-toggle>
 </div>
 
-<div #imagesContainer class="card-columns images">
+<div #imagesContainer class="card-columns">
 
-  <div *ngFor="let img of filteredImages"
+  <div *ngFor="let img of filteredImages; trackBy: trackByFn"
        [afgDnD]="{id: img.id, order: img.order}"
        (dropped)="onImageDrop($event)"
        (dragging)="onImageDragging($event)"
@@ -67,10 +67,13 @@
             <mat-icon>subdirectory_arrow_left</mat-icon>
           </button>
 
-          <img src="{{ img.url }}"
+          <img #image="onload"
+               [afgOnload]
+               src="{{ img.url }}"
                draggable="false"
-               [afgSpinner]="{isShown: true, onLoad: true}"
                class="img-fluid gallery-img pointer">
+
+          <afg-spinner *ngIf="image.afgOnload"></afg-spinner>
 
           <div class="mono-font text-break image-title">
             {{ img.title }}

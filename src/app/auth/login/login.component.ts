@@ -1,12 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AUTH_SUBJECT, AuthService } from '../services/auth.service';
 import { IUser } from '../../shared/shared.models';
+import {
+  Spinner,
+  SpinnerService
+} from '../../spinner/services/spinner.service';
 
 @Component({
   selector: 'afg-login',
@@ -24,12 +23,17 @@ export class LoginComponent {
     }
   }
 
-  errorMessage: string = '';
+  public errorMessage: string = '';
+  public form: FormGroup;
+  public spinner: Spinner;
 
-  form: FormGroup;
-
-  constructor(private fb: FormBuilder, private auth: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private spinnerService: SpinnerService
+  ) {
     this.createForm();
+    this.spinner = this.spinnerService.create();
   }
 
   createForm(): void {
@@ -50,8 +54,10 @@ export class LoginComponent {
   onSubmit({ value }: { value: IUser }): void {
     this.errorMessage = '';
     this.pending = true;
+    this.spinner.run();
     this.auth.login(value);
     this.auth.get(AUTH_SUBJECT.ERROR).subscribe((error: string) => {
+      this.spinner.stop();
       this.errorMessage = error;
       this.rebuildForm();
     });

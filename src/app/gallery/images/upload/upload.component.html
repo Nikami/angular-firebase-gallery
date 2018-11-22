@@ -67,9 +67,11 @@
            href="{{ file.url }}"
            target="_blank">
 
-          <img src="{{ file.url }}"
-               [afgSpinner]="{isShown: true, onLoad: true}"
-               class="img-fluid">
+          <img #image="onload"
+               [afgOnload]
+               src="{{ file.url }}" class="img-fluid">
+
+          <afg-spinner *ngIf="image.afgOnload"></afg-spinner>
 
         </a>
 

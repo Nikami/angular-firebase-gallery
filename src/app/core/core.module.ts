@@ -22,7 +22,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   imports: [
-    CommonModule,
     AngularFireModule.initializeApp(
       environment.firebase,
       'angular-firebase-gallery'

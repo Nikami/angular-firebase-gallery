@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Spinner, SpinnerService } from '../spinner/services/spinner.service';
 
 @Component({
   selector: 'afg-gallery',
@@ -7,5 +8,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GalleryComponent {
-  constructor() {}
+  public spinner: Spinner;
+
+  constructor(private spinnerService: SpinnerService) {
+    this.spinner = this.spinnerService.getGlobal();
+  }
 }

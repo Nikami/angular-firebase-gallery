@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from './material';
 import { DropFileDirective } from './directives/drop-file.directive';
@@ -9,8 +8,10 @@ import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { SessionDialogComponent } from './components/session-dialog/session-dialog.component';
 import { MsToTimePipe } from './pipes/ms-to-time.pipe';
-import { SpinnerDirective } from './directives/spinner.directive';
+import { OnloadDirective } from './directives/onload.directive';
 import { BrowserModule } from '@angular/platform-browser';
+import { SpinnerModule } from '../spinner';
+import { CommonModule } from '@angular/common';
 
 const COMPONENTS = [
   DropFileDirective,
@@ -20,13 +21,19 @@ const COMPONENTS = [
   DragAndDropDirective,
   MessageDialogComponent,
   SessionDialogComponent,
-  SpinnerDirective
+  OnloadDirective
 ];
 
 @NgModule({
-  imports: [CommonModule, MaterialModule, TranslateModule],
+  imports: [CommonModule, MaterialModule, TranslateModule, SpinnerModule],
   declarations: [...COMPONENTS],
-  exports: [MaterialModule, BrowserModule, TranslateModule, ...COMPONENTS],
+  exports: [
+    MaterialModule,
+    BrowserModule,
+    TranslateModule,
+    SpinnerModule,
+    ...COMPONENTS
+  ],
   entryComponents: [MessageDialogComponent, SessionDialogComponent]
 })
 export class SharedModule {}

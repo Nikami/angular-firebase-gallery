@@ -1,5 +1,6 @@
 <afg-navigation></afg-navigation>
 
 <main class="container d-flex">
+  <afg-spinner *ngIf="spinner.isSpinning$ | async" class="spinner-lg"></afg-spinner>
   <router-outlet></router-outlet>
 </main>
