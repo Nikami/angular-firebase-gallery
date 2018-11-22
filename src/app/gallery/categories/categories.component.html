@@ -39,7 +39,7 @@
 
 <div class="row flex-wrap w-100">
 
-  <div *ngFor="let category of filteredCtgs"
+  <div *ngFor="let category of filteredCtgs; trackBy: trackByFn"
        class="position-relative col-md-4 col-12 mb-4">
 
     <button (click)="openRemoveDialog(category)"

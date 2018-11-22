@@ -102,6 +102,10 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     });
   }
 
+  trackByFn(category: IFGalleryCategory): string {
+    return category.id;
+  }
+
   private subscribeToCategories(): void {
     this.categoriesSubscription = this.categories
       .get()
